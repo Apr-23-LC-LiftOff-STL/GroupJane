@@ -210,6 +210,7 @@
                 <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
                 <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
                 <label >Show Forum Replies: <input type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                <label >Show Service Post: <input type="checkbox" name="Service" (change)="userPostHistoryFilter($event)"></label>
             </div>
             <!-- Display all posts of all types that user has -->
             <ul *ngFor="let post of this.allPost">
@@ -260,6 +261,23 @@
                 <ng-template #hiddenPost>
                     <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
                     <h3>{{ post.title }}</h3> <a routerLink='/forum/post/{{post.id}}' routerLinkActive="active"></a>
+                    <h6>{{ post.description }}</h6>
+                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="unhidePost(post)">Unhide Post?</button>
+                    <p>This post is hidden.</p>
+                    </div>
+                </ng-template>
+                </div>
+                <!-- Display Service Object -->
+                <div *ngIf="post.type === 'Service'">
+                    <div *ngIf="post.hidden === false; else hiddenPost">
+                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
+                    <h3><a>{{ post.title }}</a></h3>
+                    <h6>{{ post.description }}</h6>
+                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                    </div>
+                <ng-template #hiddenPost>
+                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
+                    <h3>{{ post.title }}</h3> <a routerLink='/serviceitem?id={{post.id}}' routerLinkActive="active"></a>
                     <h6>{{ post.description }}</h6>
                     <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="unhidePost(post)">Unhide Post?</button>
                     <p>This post is hidden.</p>

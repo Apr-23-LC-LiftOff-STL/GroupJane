@@ -4,6 +4,7 @@ import org.rally.backend.eventsarm.models.Event;
 import org.rally.backend.forumarm.models.ForumPosts;
 import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.resourcearm.model.response.Resource;
+import org.rally.backend.restaurantarm.models.Review;
 import org.rally.backend.servicesarm.model.response.Service;
 
 import java.util.List;
@@ -17,11 +18,19 @@ public class UserPostHistory {
     List<Event> viewUserEventPost;
     List<Service> viewUserServicePost;
     List<Resource> viewUserResourcePost;
-    //List<RestaurantReview> viewUserRestaurantReviews;
+    List<Review> viewUserRestaurantReviews;
 
 
 
     public UserPostHistory() {
+    }
+
+    public List<Review> getViewUserRestaurantReviews() {
+        return viewUserRestaurantReviews;
+    }
+
+    public void setViewUserRestaurantReviews(List<Review> viewUserRestaurantReviews) {
+        this.viewUserRestaurantReviews = viewUserRestaurantReviews;
     }
 
     public List<Resource> getViewUserResourcePost() {

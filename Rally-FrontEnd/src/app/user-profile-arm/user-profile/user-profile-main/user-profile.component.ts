@@ -43,6 +43,7 @@ export class UserProfileComponent implements OnInit {
   forumPost: any[];
   forumReplies: any[];
   eventPost: Event[];
+  servicePost: any[];
   
   /* HTML booleans */
   notHidden: boolean = true;
@@ -84,10 +85,11 @@ export class UserProfileComponent implements OnInit {
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
         this.userEntityDmList = data.viewUserDmHistory.userEntities;
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
-        // console.log(this.hiddenPost)
+        console.log(data)
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
         this.eventPost = data.viewUserPostHistory.viewUserEventPost;
+        this.servicePost = data.viewUserPostHistory.viewUserServicePost;
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
                                            this.userInformation.neighborhood,
@@ -96,7 +98,7 @@ export class UserProfileComponent implements OnInit {
         /* Remove active user from dm list */
         this.userEntityDmList = this.userEntityDmList.filter((user: UserEntity) => user.userName !== localStorage.getItem("userName"));
 
-        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost, this.servicePost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       })
@@ -152,6 +154,7 @@ export class UserProfileComponent implements OnInit {
     this.cdref.detectChanges();
   }
 
+  /* Update the status of a post and mark it hidden so HTML doesn't dipslay the post */
   updateHiddenPost() {
     for (let hide of this.hiddenPost) {
       for (let post of this.allPost) {

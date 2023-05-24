@@ -166,4 +166,15 @@ public class UserProfileControllerService {
         }
         return targetForumPostReplies;
     }
+
+    public static List<org.rally.backend.servicesarm.model.response.Service> getUserServicePost(String userName) {
+        List<org.rally.backend.servicesarm.model.response.Service> targetServicePost = new ArrayList<>();
+        for (org.rally.backend.servicesarm.model.response.Service service : serviceRepository.findAll()) {
+            if (Objects.equals(service.getName(), userName)) {
+                targetServicePost.add(service);
+            }
+
+        }
+        return targetServicePost;
+    }
 }
