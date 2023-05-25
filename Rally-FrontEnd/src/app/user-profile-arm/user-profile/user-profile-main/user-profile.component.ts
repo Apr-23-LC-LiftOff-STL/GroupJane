@@ -203,7 +203,6 @@ export class UserProfileComponent implements OnInit {
     if (event.target.files[0].size > 1024000) {   
       this.uploadErrorMsg = ["File is too large, please select a smaller image", true];
       this.uploadedImage = null;
-      console.log(this.uploadedImage)
       return;
     } else {
       this.uploadedImage = event.target.files[0];
