@@ -1,18 +1,18 @@
 package org.rally.backend.userprofilearm.model.dto;
 
-public class HidePostDTO {
+public class HideAndFavoritePostDTO {
 
     public String postType;
     public Integer hidePostId;
     public Integer userId;
 
-    public HidePostDTO(String postType, Integer hidePostId, Integer userId) {
+    public HideAndFavoritePostDTO(String postType, Integer hidePostId, Integer userId) {
         this.postType = postType;
         this.hidePostId = hidePostId;
         this.userId = userId;
     }
 
-    public HidePostDTO() {
+    public HideAndFavoritePostDTO() {
     }
 
     public String getPostType() {

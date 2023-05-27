@@ -30,6 +30,7 @@ public class UserProfileControllerService {
     static HiddenPostRepository hiddenPostRepository;
     static ServiceRepository serviceRepository;
     static EventRepository eventRepository;
+    static FavoriteRepository favoriteRepository;
 
 
     @Autowired
@@ -42,7 +43,8 @@ public class UserProfileControllerService {
                                         RepliesRepository repliesRepository,
                                         HiddenPostRepository hiddenPostRepository,
                                         ServiceRepository serviceRepository,
-                                        EventRepository eventRepository) {
+                                        EventRepository eventRepository,
+                                        FavoriteRepository favoriteRepository) {
         UserProfileControllerService.userRepository = userRepository;
         UserProfileControllerService.roleRepository = roleRepository;
         UserProfileControllerService.userInformationRepository = userInformationRepository;
@@ -53,6 +55,7 @@ public class UserProfileControllerService {
         UserProfileControllerService.hiddenPostRepository = hiddenPostRepository;
         UserProfileControllerService.serviceRepository = serviceRepository;
         UserProfileControllerService.eventRepository = eventRepository;
+        UserProfileControllerService.favoriteRepository = favoriteRepository;
     }
 
     /** This method is the list that displays the users post history when viewing a user profile
@@ -120,6 +123,17 @@ public class UserProfileControllerService {
             }
         }
         return new UserDmHistory(allUsers, allMessagesRelatedToUser);
+    }
+
+    /** This method returns a list of Favorite Post objects **/
+    public static List<FavoritePost> getFavoritePostListForUserBundleMain(int userId) {
+        List<FavoritePost> favoritePostsList = new ArrayList<>();
+        for (FavoritePost post : favoriteRepository.findAll()) {
+            if (post.getUserId() == userId) {
+                favoritePostsList.add(post);
+            }
+        }
+        return favoritePostsList;
     }
 
 

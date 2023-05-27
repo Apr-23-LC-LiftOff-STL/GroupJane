@@ -44,6 +44,9 @@ export class UserProfileComponent implements OnInit {
   forumReplies: any[];
   eventPost: Event[];
   servicePost: any[];
+
+  /* Favorite Posts */
+  favoritePost: any[] = [];
   
   /* HTML booleans */
   notHidden: boolean = true;
@@ -85,7 +88,6 @@ export class UserProfileComponent implements OnInit {
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
         this.userEntityDmList = data.viewUserDmHistory.userEntities;
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
-        console.log(data)
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
         this.eventPost = data.viewUserPostHistory.viewUserEventPost;

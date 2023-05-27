@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class HiddenPost {
+public class FavoritePost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +15,14 @@ public class HiddenPost {
     private Integer hidePostId;
     private Integer userId;
 
-    public HiddenPost(String postType, Integer hidePostId, Integer userId) {
+    public FavoritePost(String postType, Integer hidePostId, Integer userId) {
         this.postType = postType;
         this.hidePostId = hidePostId;
         this.userId = userId;
     }
 
-    public HiddenPost() {
+    public Integer getId() {
+        return id;
     }
 
     public String getPostType() {
@@ -30,10 +31,6 @@ public class HiddenPost {
 
     public void setPostType(String postType) {
         this.postType = postType;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public Integer getHidePostId() {

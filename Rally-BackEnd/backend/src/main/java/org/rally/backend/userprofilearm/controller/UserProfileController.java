@@ -11,7 +11,7 @@ import org.rally.backend.servicesarm.repository.ServiceRepository;
 import org.rally.backend.userprofilearm.exception.MinimumCharacterException;
 import org.rally.backend.userprofilearm.model.*;
 import org.rally.backend.userprofilearm.model.dto.DirectMessageDTO;
-import org.rally.backend.userprofilearm.model.dto.HidePostDTO;
+import org.rally.backend.userprofilearm.model.dto.HideAndFavoritePostDTO;
 import org.rally.backend.userprofilearm.model.dto.UserInfoDTO;
 import org.rally.backend.userprofilearm.model.response.ResponseMessage;
 import org.rally.backend.userprofilearm.model.UserPostHistory;
@@ -43,6 +43,7 @@ public class UserProfileController {
     HiddenPostRepository hiddenPostRepository;
     ServiceRepository serviceRepository;
     EventRepository eventRepository;
+    FavoriteRepository favoriteRepository;
 
 
     @Autowired
@@ -51,7 +52,7 @@ public class UserProfileController {
                                  DirectMessageRepository directMessageRepository, ProfilePictureRepository profilePictureRepository,
                                  ForumPostRepository forumPostRepository, RepliesRepository repliesRepository,
                                  HiddenPostRepository hiddenPostRepository, ServiceRepository serviceRepository,
-                                 EventRepository eventRepository) {
+                                 EventRepository eventRepository, FavoriteRepository favoriteRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -62,6 +63,7 @@ public class UserProfileController {
         this.hiddenPostRepository = hiddenPostRepository;
         this.serviceRepository = serviceRepository;
         this.eventRepository = eventRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     /** GET REQUEST **/
@@ -215,29 +217,34 @@ public class UserProfileController {
                 .body(new ResponseMessage("Image uploaded successfully: " + file.getOriginalFilename()));
     }
 
+    @PostMapping("/addFavoritePost")
+    public ResponseEntity<?> addFavorite(@RequestBody HideAndFavoritePostDTO hideAndFavoritePostDTO) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/hidePostList")
-    public ResponseEntity<?> hiddenPosts(@RequestBody HidePostDTO hidePostDTO) {
+    public ResponseEntity<?> hiddenPosts(@RequestBody HideAndFavoritePostDTO hideAndFavoritePostDTO) {
 
         /** hide post based on their postType, sort through repos to find the right object to hide **/
 
             for (HiddenPost post : hiddenPostRepository.findAll()) {
-                if (Objects.equals(hidePostDTO.getPostType(), post.getPostType()) && Objects.equals(post.getHidePostId(), hidePostDTO.getHidePostId()) && Objects.equals(hidePostDTO.getUserId(), post.getUserId())) {
+                if (Objects.equals(hideAndFavoritePostDTO.getPostType(), post.getPostType()) && Objects.equals(post.getHidePostId(), hideAndFavoritePostDTO.getHidePostId()) && Objects.equals(hideAndFavoritePostDTO.getUserId(), post.getUserId())) {
                     ResponseMessage responseMessage = new ResponseMessage("Post Already Hidden");
                     return new ResponseEntity<>(responseMessage, HttpStatus.OK);
                 }
             }
 
-        HiddenPost hiddenPost = new HiddenPost(hidePostDTO.getPostType(), hidePostDTO.getHidePostId(), hidePostDTO.getUserId());
+        HiddenPost hiddenPost = new HiddenPost(hideAndFavoritePostDTO.getPostType(), hideAndFavoritePostDTO.getHidePostId(), hideAndFavoritePostDTO.getUserId());
         hiddenPostRepository.save(hiddenPost);
 
         return new ResponseEntity<>(hiddenPostRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/unHidePost")
-    public ResponseEntity<?> unHidePostFromProfile(@RequestBody HidePostDTO hidePostDTO) {
+    public ResponseEntity<?> unHidePostFromProfile(@RequestBody HideAndFavoritePostDTO hideAndFavoritePostDTO) {
 
         for (HiddenPost post : hiddenPostRepository.findAll()) {
-            if (Objects.equals(hidePostDTO.getHidePostId(), post.getHidePostId()) && Objects.equals(hidePostDTO.getPostType(), post.getPostType()) && Objects.equals(hidePostDTO.getUserId(), post.getUserId())) {
+            if (Objects.equals(hideAndFavoritePostDTO.getHidePostId(), post.getHidePostId()) && Objects.equals(hideAndFavoritePostDTO.getPostType(), post.getPostType()) && Objects.equals(hideAndFavoritePostDTO.getUserId(), post.getUserId())) {
                 hiddenPostRepository.delete(post);
                 ResponseMessage responseMessage = new ResponseMessage("Post is no longer hidden.");
                 return new ResponseEntity<>(responseMessage, HttpStatus.OK);

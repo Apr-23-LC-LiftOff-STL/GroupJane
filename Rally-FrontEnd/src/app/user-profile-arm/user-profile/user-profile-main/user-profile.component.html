@@ -204,7 +204,7 @@
         <h2>Post History</h2>
         <div class="card">     
             <div class="scroll-posthistory">
-            <div *ngIf="this?.allPost.length === 0"><h3 style="color: #ffffff;">User Does not have any post history</h3></div>
+            <div *ngIf="this?.allPost.length === 0"><h3>User Does not have any post history</h3></div>
             <!-- Filter to display posts of a specific type -->
             <div>
                 <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
@@ -298,6 +298,10 @@
 <div class="col-3">
     <div class="card" style="background-color: #0EBB9A;">
         <h2>Favorites</h2>
+        <div class="card" *ngIf="this?.favoritePost.length === 0"><h3>User has no favorite post yet!</h3></div>
+        <div class="card">
+            
+        </div>
     </div>
 </div>
 

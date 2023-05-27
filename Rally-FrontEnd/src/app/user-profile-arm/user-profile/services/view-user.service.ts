@@ -180,4 +180,19 @@ export class ViewUserService {
     return bigJoin.sort();
   }
 
+  setFavoritePosts(fav) {
+    let favoritePosts: any[] = [];
+    for (let post of fav) {
+      let favorite = {
+        id: Number(post.id),
+        type: "Favorite",
+        title: post.title,
+        description: post.description,
+        hidden: false,
+        originalObj: post
+      }
+      favoritePosts.push(favorite);
+    }
+    return favoritePosts;
+  }
 }
