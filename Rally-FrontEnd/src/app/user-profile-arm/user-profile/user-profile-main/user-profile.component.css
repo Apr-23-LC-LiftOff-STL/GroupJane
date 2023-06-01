@@ -32,7 +32,6 @@ text-decoration: none;
 
 .myButton {
   background-color: #0EBB9A;
-/* border-radius:7px; */
 display: internal;
 color:#ffffff;
 font-family: montserrat, sans-serif;
@@ -41,7 +40,7 @@ font-weight:bold;
   text-shadow: 0.5px 0.5px 0px #000;
 padding:15px 75px;
 text-decoration: none;
-  float: right;
+float: right;
   
 }
 
@@ -60,6 +59,21 @@ a {
   color: #fff;
   background-color:  #85CDE3;
   border-color:  #85CDE3;
+}
+
+
+label {
+font-family: oswald, sans-serif;
+font-size: 20px;
+font-weight: bolder;
+margin-left: 10px;
+margin-bottom: 5px;
+}
+
+
+.form-select {
+  margin-left: 10px;
+  width: auto;
 }
 
 

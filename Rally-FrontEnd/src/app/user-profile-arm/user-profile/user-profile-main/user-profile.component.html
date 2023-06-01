@@ -36,15 +36,16 @@
 
 
 
-<body style="margin-top: 120px;">
+<body style="margin-top: 140px;">
     <div class="container">
 
 
         <div class="row">
 
             <div *ngIf="logInStatus"> 
-                <div style="float: right;">
-                    <button class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Rally Users</a></button>
+                <div>
+                    <h2 style="font-family: Oswald, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
+                    <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Users</a></button>
                     <!-- <button style="background-color: #85CDE3;" (click)="logOut()">Log Out</button> -->
                 </div>
             </div>
@@ -53,22 +54,14 @@
 <!-- Log Out and Search Nav bar  -->
 
 <br>
+<br>
 
-<!-- <div class="container"> -->
-<!-- First Row in User Profile -->
-<!-- First Row in User Profile -->
 <!-- First Row in User Profile -->
 <div class="row" >
 
-
-<!-- User Profile Picture -->
-<!-- User Profile Picture -->
 <!-- User Profile Picture -->
 <div class="col-3">
-    <!-- <div class="card" style="background-color: #0EBB9A;"> -->
-        <!-- <div class="card"> -->
-        <!-- <h4>Hello<br>{{currentUser}}</h4> -->
-        <!-- Display current profile picture -->
+   
         <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
             <img [src]="dbImage" width="100%" height="auto">
         </div>
@@ -78,30 +71,117 @@
         </ng-template>
         <!-- Button to show upload options for user -->
         <div *ngIf="changeProfilePic; else changePic">
-            <button class="btn btn-outline-info btn-xm"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">Update Profile Picture</button>
+            <button class="btn btn-outline-info btn-xm"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">change pic</button>
         </div>
+
         <!-- Upload options -->
         <ng-template #changePic>
-            <button style="background-color: #85CDE3;" (click)="changeProfilePic=true">Cancel</button>
             <form>
             <div class="form-group">
-                <input type="file" (change)="onImageUpload($event)">
+                <input style="margin-top: 5px;" type="file" (change)="onImageUpload($event)">
                 <div *ngIf="uploadErrorMsg">
-                    <p style="color: crimson;">{{ uploadErrorMsg[0] }}</p>
+                    <p style="color: #C03E24;">{{ uploadErrorMsg[0] }}</p>
                 </div>
-                <input style="background-color:  #85CDE3;" type="button" value="upload" (click)="imageUploadAction()">
+                <input style="margin-top: 5px;"class="btn btn-outline-info btn-xm" type="button" value="upload" (click)="imageUploadAction()">
+                <button style="margin-left: 5px; margin-top: 5px; margin-top: 5px;" class="btn btn-outline-info btn-xm" (click)="changeProfilePic=true">cancel</button>
             </div>
             </form>
         </ng-template>
-    <!-- </div> -->
+
+
+
+
+<!-- User Information -->
+
+<br>
+<br>
+<br>
+
+<span>
+
+    <div>
+        <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">my profile</h2>
+        <div *ngIf="changeInfo; else changeForm"> 
+
+        <!-- Display user Information -->
+        <div class="card">
+            <br> 
+            <label>first name<br><h4>{{ userInformation?.firstName }}</h4></label>
+            <label>last name<br><h4>{{ userInformation?.lastName}}</h4></label>
+            <label>neigborhood<br><h4>{{ userInformation?.neighborhood}}</h4></label>
+            <label>city<br><h4>{{ userInformation?.city}}</h4></label>
+            <label>state<br><h4>{{ userInformation?.state}}</h4></label>  
+            <div>
+                <button class="btn btn-outline-info btn-xm" style="margin-left: 10px; margin-top: 5px;" (click)="editProfileDetails()">update</button> 
+            </div>
+            <br>
+        </div>
+        </div>
+
+        <!-- Form to change/update user information -->
+        <ng-template #changeForm>
+        <div class="form-group: card" style="background-color: #f6f4f3"> 
+            <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
+            <br><br>
+            <label class="form-label" for="firstName">first name<br>
+            <input class="form-control" type="text" id="firstName" name="firstName" placeholder={{userInformation?.firstName}} [(ngModel)]="model.firstName" #firstName="ngModel"></label>
+            <br><br>
+            <label class="form-label" for="lastName">last name<br>
+            <input class="form-control" type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
+            <br><br>
+            <label class="form-label" for="category-drop">neighborhood</label><br>
+            <select class="form-select" name="neighborhood" id="category-drop" [(ngModel)]="model.neigborhood" #neigborhood="ngModel">
+                <option value="" disabled selected>Select your neighborhood</option>
+                <option value="Compton Heights">Compton Heights</option>
+                <option value="Central West End">Central West End</option>
+                <option value="The Hill">The Hill</option>
+                <option value="Soulard">Soulard</option>
+                <option value="Bevo">Bevo</option>
+                <option value="Gravois Park">Gravois Park</option>
+                <option value="Tower Grove South">Tower Grove South</option>
+                <option value="Downtown">Down Town</option>
+                <option value="Midtown">Midtown</option>
+            </select>
+            <br>
+            <label class="form-label" for="category-drop">city</label><br>
+            <select class="form-select" name="city" id="category-drop" [(ngModel)]="model.city" #city="ngModel">
+                <option value="" disabled selected>Select your city</option>
+                <option value="Saint Louis">Saint Louis</option>
+                <option value="Jennings">Jennings</option>
+                <option value="Clayton">Clayton</option>
+                <option value="University City">University City</option>
+                <option value="Affton">Affton</option>
+                <option value="Ferguson">Ferguson</option>
+            </select> 
+            <br>
+            <label class="form-label" for="category-drop">state</label><br>
+            <select class="form-select" name="state" id="category-drop" [(ngModel)]="model.state" #state="ngModel">
+                <option value="" disabled selected>Select your state</option>
+                <option value="Missouri">Missouri</option>
+                <option value="Illinois">Illinois</option>
+            </select>
+            <br>
+            <input class="btn btn-outline-info btn-xm" style="margin-left: 10px;" type="submit" value="Submit">
+            <button class="btn btn-outline-info btn-xm" style="margin-left: 5px;" (click)="changeInfo=true">Back</button>
+            <br>
+            <br>
+            </form>
+            </div>
+        </ng-template>
+    </div>
+
+
+</span>
+
 </div>
 
 
 <!-- User Direct Messaging service -->
 <!-- User Direct Messaging service -->
 <!-- User Direct Messaging service -->
-<div class="col-9">
-    <div class="card" style="background-color: #0EBB9A;">
+<div class="col-6">
+    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">My Messages</h2>
+    <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
         <h4 *ngIf="userDms; else differentTitle">View your messages</h4>
         <ng-template #differentTitle>
@@ -169,79 +249,6 @@
 <div class="row">
 
 
-<!-- User Information -->
-<!-- User Information -->
-<!-- User Information -->
-<div class="col-3">
-    <div class="card" style="background-color: #0EBB9A;">
-        <h4>{{ userEntity?.userName }}'s<br>Information</h4>
-        <div *ngIf="changeInfo; else changeForm"> 
-        <!-- Display user Information -->
-        <div class="card">
-            <br> 
-            <label>First Name:<br><h4>{{ userInformation?.firstName }}</h4></label>
-            <br>
-            <label>Last Name:<br><h4>{{ userInformation?.lastName}}</h4></label>
-            <br>
-            <label>Neigborhood:<br><h4>{{ userInformation?.neighborhood}}</h4></label>
-            <br>
-            <label>City:<br><h4>{{ userInformation?.city}}</h4></label>
-            <br>       
-            <label>State:<br><h4>{{ userInformation?.state}}</h4></label>  
-            <br>
-            <button style="background-color: #85CDE3;" (click)="editProfileDetails()">Edit Profile Details</button>                   
-        </div>
-        </div>
-        <!-- Form to change/update user information -->
-        <ng-template #changeForm>
-        <div class="form-group: card" style="background-color: #ecdfc3;"> 
-            <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
-            <br><br>
-            <label for="firstName">First Name:<br>
-            <input type="text" id="firstName" name="firstName" placeholder={{userInformation?.firstName}} [(ngModel)]="model.firstName" #firstName="ngModel"></label>
-            <br><br>
-            <label for="lastName">Last Name:<br>
-            <input type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
-            <br><br>
-            <label for="category-drop">Neighborhood:</label><br>
-            <select name="neighborhood" id="category-drop" [(ngModel)]="model.neigborhood" #neigborhood="ngModel">
-                <option value="" disabled selected>Select your neighborhood</option>
-                <option value="Compton Heights">Compton Heights</option>
-                <option value="Central West End">Central West End</option>
-                <option value="The Hill">The Hill</option>
-                <option value="Soulard">Soulard</option>
-                <option value="Bevo">Bevo</option>
-                <option value="Gravois Park">Gravois Park</option>
-                <option value="Tower Grove South">Tower Grove South</option>
-                <option value="Downtown">Down Town</option>
-                <option value="Midtown">Midtown</option>
-            </select>
-            <br><br>
-            <label for="category-drop">City:</label><br>
-            <select name="city" id="category-drop" [(ngModel)]="model.city" #city="ngModel">
-                <option value="" disabled selected>Select your city</option>
-                <option value="Saint Louis">Saint Louis</option>
-                <option value="Jennings">Jennings</option>
-                <option value="Clayton">Clayton</option>
-                <option value="University City">University City</option>
-                <option value="Affton">Affton</option>
-                <option value="Ferguson">Ferguson</option>
-            </select> 
-            <br><br>
-            <label for="category-drop">State:</label><br>
-            <select name="state" id="category-drop" [(ngModel)]="model.state" #state="ngModel">
-                <option value="" disabled selected>Select your state</option>
-                <option value="Missouri">Missouri</option>
-                <option value="Illinois">Illinois</option>
-            </select>
-            <br><br>
-            <input style="background-color: #85CDE3;" type="submit" value="Submit">
-            <button style="background-color: #85CDE3;" (click)="changeInfo=true">Back</button>
-            </form>
-            </div>
-        </ng-template>
-    </div>
-</div>
     
 
 <!-- User Post History Section -->
