@@ -37,7 +37,8 @@
 
 
 <body style="margin-top: 140px;">
-    <div class="container">
+    <!-- <div class="container" style="background-color: #f6f4f3"> -->
+        <div class="container">
 
 
         <div class="row">
@@ -100,7 +101,7 @@
 <span>
 
     <div>
-        <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">my profile</h2>
+        <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Profile</h2>
         <div *ngIf="changeInfo; else changeForm"> 
 
         <!-- Display user Information -->
@@ -180,21 +181,36 @@
 <!-- User Direct Messaging service -->
 <!-- User Direct Messaging service -->
 <div class="col-6">
-    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">My Messages</h2>
+    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Messages</h2>
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
-        <h4 *ngIf="userDms; else differentTitle">View your messages</h4>
+        <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4>
         <ng-template #differentTitle>
-            <h4>Direct Messaging {{ respondToDm.userName }} </h4>
+            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
         <!-- Flex box to display user conversations -->
         <div class="card" >
             <!-- Display the users with message history -->
             <div class="scroll" *ngIf="userDms; else showConversations">
             <ul *ngFor="let user of userEntityDmList">
-                <div class="card" style="background-color: #F9A605">
-                <h6 style="text-align: left;" (click)="displayConversation(user)">{{ user.userName }}</h6>
-                </div>
+                <!-- <div class="card" style="background-color: #F9A605"> -->
+
+                    <br>
+                    <!--return to check if displaying horizontally-->
+                    <div class="card w-25" style="display: inline-block;">
+                        <!--Alex - how do I add other user's image?-->
+                        <div *ngIf="dbImage; else default">
+                            <img [src]="dbImage" class="card-img-top">
+                        </div>
+                    <!-- Default profile picture if no picture has been uploaded -->
+                        <ng-template #default>
+                            <img src="/assets/user-profile-assets/profile-pic.gif" class="card-img-top">
+                        </ng-template>
+                        
+                        <div class="card-body">
+                            <p style="text-align: center; font-size: 15px; font-weight: bolder;" (click)="displayConversation(user)">{{ user.userName }}</p>
+                        </div>
+                    </div>
             </ul>
             </div>
             <!-- When user name is selected, displays that particular conversation -->
