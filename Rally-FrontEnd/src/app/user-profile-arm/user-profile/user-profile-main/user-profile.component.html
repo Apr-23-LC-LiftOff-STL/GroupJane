@@ -184,9 +184,10 @@
     <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Messages</h2>
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
-        <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4>
+        <!-- <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4> -->
+         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">continue a conversation</h4>
         <ng-template #differentTitle>
-            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
+            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
         <!-- Flex box to display user conversations -->
         <div class="card" >
@@ -214,6 +215,62 @@
             </ul>
             </div>
             <!-- When user name is selected, displays that particular conversation -->
+
+            <ng-template #showConversations>
+                <div class="scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                    <!-- Display the message history -->
+                    <table style="width: 100%;" *ngFor="let dm of conversation">
+                        <br>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <td>
+                            <div *ngIf="dm.sentByUserName !== currentUser">
+                                <tr class="thought" style="background-color: #f6f4f3; float: left;">{{ dm.messageContent }}</tr>
+                            </div>
+                            
+                            <!-- <div *ngIf="dm.receivedByUserName">
+                                <tr class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
+                            </div> -->
+
+                            <!-- <tr class="card" style="background-color: #F9A605">Sent: <br>{{dm.sentByUserName}}</tr>  -->
+                        </td>
+                        <td>
+                            <div *ngIf="dm.receivedByUserName === currentUser">
+                                <tr class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
+                            </div>
+                        </td>
+
+
+
+                        <!-- <td>
+                            <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
+                        </td>
+                        <td>
+                            <tr class="card" style="background-color: #F9A605">Recieved: <br>{{ dm.receivedByUserName}}</tr>
+                        </td> -->
+                        <br>
+                    </table>
+                    <!-- Respond to messages -->
+                    <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
+                        <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
+                        <ng-template #lengthError>
+                        <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
+                        </ng-template>
+                        <h3>Respond:</h3>
+                        <textarea rows="3" cols="40" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
+                        <div *ngIf="noError; else lengthError"></div>
+                        <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
+                        <button style="background-color: #85CDE3;" (click)="userDms=true">Return to all Messages</button>
+                    </div>
+                    </form>
+                </div>   
+            </ng-template>
+
+
+
             <ng-template #showConversations>
                 <div class="scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                     <!-- Display the message history -->
