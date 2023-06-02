@@ -36,14 +36,15 @@
 
 
 
-<body style="margin-top: 140px;">
+<!-- <body style="margin-top: 140px;"> -->
+    <body >
     <!-- <div class="container" style="background-color: #f6f4f3"> -->
         <div class="container">
 
 
         <div class="row">
 
-            <div *ngIf="logInStatus"> 
+            <div *ngIf="logInStatus" style="margin-top: 140px;"> 
                 <div>
                     <h2 style="font-family: Oswald, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
                     <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Users</a></button>
@@ -62,6 +63,9 @@
 
 <!-- User Profile Picture -->
 <div class="col-3">
+
+    <br>
+    <br>
    
         <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
             <img [src]="dbImage" width="100%" height="auto">
@@ -96,7 +100,7 @@
 
 <br>
 <br>
-<br>
+<!-- <br> -->
 
 <span>
 
@@ -278,7 +282,7 @@
 <!-- User Post History Section -->
 <!-- User Post History Section -->
 <div class="col-3">
-    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">My History</h2>
+    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">History</h2>
     <div class="card">
         <!-- <h2>Post History</h2> -->
         <div class="card">     

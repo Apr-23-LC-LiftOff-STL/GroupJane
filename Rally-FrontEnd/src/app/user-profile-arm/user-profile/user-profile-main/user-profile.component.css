@@ -81,6 +81,10 @@ placeholder {
   line-height: 20px;
 }
 
+body {
+  background: linear-gradient(to top right, #0EBB9A, #ffffff 75%);
+}
+
 
 
 /* end Jami additions */
