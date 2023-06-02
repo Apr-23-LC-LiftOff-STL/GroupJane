@@ -82,7 +82,11 @@ placeholder {
 }
 
 body {
-  background: linear-gradient(to top right, #0EBB9A, #ffffff 75%);
+  background: linear-gradient(to top right, #0EBB9A, #ffffff 70%);
+}
+
+table {
+  height: 20px;
 }
 
 
@@ -114,10 +118,19 @@ body {
 
   div.scroll-posthistory {
     column-width: auto;
-    height: auto;
+    /* height: auto; */
+    height: 865px;
     overflow: auto;
     resize: vertical;
     /* text-align: center; */
+    padding: 8px;
+  }
+
+  div.scroll-favorites {
+    column-width: auto;
+    height: 250px ;
+    overflow: auto;
+    resize: vertical;
     padding: 8px;
   }
 
@@ -130,6 +143,8 @@ body {
   max-width:700px;
   min-height:40px;
   margin:auto;
+  font-size:medium;
+  font-weight: 450;
   /* position:relative; */
   /* align-items:center;
   justify-content:center;

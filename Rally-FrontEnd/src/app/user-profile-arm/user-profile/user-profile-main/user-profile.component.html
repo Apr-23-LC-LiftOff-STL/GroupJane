@@ -125,7 +125,8 @@
 
         <!-- Form to change/update user information -->
         <ng-template #changeForm>
-        <div class="form-group: card" style="background-color: #f6f4f3"> 
+        <div class="form-group: card" style=" background: linear-gradient(to bottom left, #F9A605, #ffffff 70%);">
+        <!-- <div class="form-group: card" style="background-color: #f6f4f3">  -->
             <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
             <br><br>
             <label class="form-label" for="firstName">first name<br>
@@ -189,9 +190,9 @@
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
         <!-- <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4> -->
-         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">conversations</h4>
+         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">my conversations</h4>
         <ng-template #differentTitle>
-            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
+            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
         <!-- Flex box to display user conversations -->
         <div class="card" >
@@ -225,14 +226,9 @@
                     <!-- Display the message history -->
                     <table style="width: 100%;" *ngFor="let dm of conversation">
                         <br>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <!-- <th></th> -->
-                        </tr>
-                        <td>    
+                        <td >    
                             <div >
-                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #f6f4f3; float: left; ">{{ dm.messageContent }}</tr>
+                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #f6f4f3; float: left;">{{ dm.messageContent }}</tr>
                                 <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
                             </div>                          
                         </td>
@@ -268,9 +264,12 @@
             <br>
             <br>
             <div>
-                <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Favorites</h2>
+                <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600">Favorites</h2>
                 <div class="card">
-                  
+                    <div class="scroll-favorites">
+
+
+                    </div>
                 </div>
             </div>
 </div>
@@ -282,17 +281,19 @@
 <!-- User Post History Section -->
 <!-- User Post History Section -->
 <div class="col-3">
-    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">History</h2>
+    <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600">History</h2>
     <div class="card">
+        <!-- <p>Show</p>
+        <hr> -->
         <!-- <h2>Post History</h2> -->
         <div class="card">     
             <div class="scroll-posthistory">
             <div *ngIf="this?.allPost.length === 0"><h3 style="color: #ffffff;">User Does not have any post history</h3></div>
             <!-- Filter to display posts of a specific type -->
             <div>
-                <label >Show Forum Post: <input type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                <label >Show Event Post: <input type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
-                <label >Show Forum Replies: <input type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" >my posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label">my events <input class="form-check-input" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label class="form-check-label">my replies <input class="form-check-input" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
             </div>
             <!-- Display all posts of all types that user has -->
             <ul *ngFor="let post of this.allPost">
@@ -391,11 +392,11 @@
 
     </div>
 <!-- </body> -->
+<!-- <br>
 <br>
 <br>
 <br>
-<br>
-<br>
+<br> -->
 <!--end of Jami test styling-->
 
 
