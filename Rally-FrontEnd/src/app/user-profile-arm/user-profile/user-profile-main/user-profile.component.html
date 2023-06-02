@@ -185,7 +185,7 @@
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
         <!-- <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4> -->
-         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">continue a conversation</h4>
+         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">conversations</h4>
         <ng-template #differentTitle>
             <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
@@ -224,91 +224,50 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            <!-- <th></th> -->
                         </tr>
-                        <td>
-                            <div *ngIf="dm.sentByUserName !== currentUser">
-                                <tr class="thought" style="background-color: #f6f4f3; float: left;">{{ dm.messageContent }}</tr>
-                            </div>
-                            
-                            <!-- <div *ngIf="dm.receivedByUserName">
-                                <tr class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
-                            </div> -->
-
-                            <!-- <tr class="card" style="background-color: #F9A605">Sent: <br>{{dm.sentByUserName}}</tr>  -->
+                        <td>    
+                            <div >
+                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #f6f4f3; float: left; ">{{ dm.messageContent }}</tr>
+                                <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
+                            </div>                          
                         </td>
-                        <td>
-                            <div *ngIf="dm.receivedByUserName === currentUser">
-                                <tr class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
-                            </div>
-                        </td>
-
-
-
-                        <!-- <td>
-                            <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
-                        </td>
-                        <td>
-                            <tr class="card" style="background-color: #F9A605">Recieved: <br>{{ dm.receivedByUserName}}</tr>
-                        </td> -->
                         <br>
                     </table>
                     <!-- Respond to messages -->
                     <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
-                        <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
+                        <div>
                         <ng-template #lengthError>
-                        <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
+                        <h6 style="color: #C03E24;">Minimum of 3 characters required.</h6>
                         </ng-template>
-                        <h3>Respond:</h3>
-                        <textarea rows="3" cols="40" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
-                        <div *ngIf="noError; else lengthError"></div>
-                        <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
-                        <button style="background-color: #85CDE3;" (click)="userDms=true">Return to all Messages</button>
+                        <br>
+                        <textarea class="form-control" placeholder="What's on your mind?" rows="3" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
+                        <div *ngIf="noError; else lengthError">
+                        <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="Send Message">   
+                        <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">Back to Conversations</button>
+                        <br>
+                        <br>
+                        </div>
                     </div>
                     </form>
                 </div>   
             </ng-template>
 
 
-
-            <ng-template #showConversations>
-                <div class="scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-                    <!-- Display the message history -->
-                    <table style="width: 100%;" *ngFor="let dm of conversation">
-                        <br>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <td>
-                            <tr class="card" style="background-color: #F9A605">Sent: <br>{{dm.sentByUserName}}</tr> 
-                        </td>
-                        <td>
-                            <tr class="thought">Message: <br>{{ dm.messageContent }}</tr> 
-                        </td>
-                        <td>
-                            <tr class="card" style="background-color: #F9A605">Recieved: <br>{{ dm.receivedByUserName}}</tr>
-                        </td>
-                        <br>
-                    </table>
-                    <!-- Respond to messages -->
-                    <form #respondToDm="ngForm" (ngSubmit)="respondToUserDm(respondToDm)">
-                        <div class="card" style="align-items: center; background-color: rgb(126, 161, 154);">
-                        <ng-template #lengthError>
-                        <h6 style="color: rgb(165, 35, 61);">Minimum of 3 characters required.</h6>
-                        </ng-template>
-                        <h3>Respond:</h3>
-                        <textarea rows="3" cols="40" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
-                        <div *ngIf="noError; else lengthError"></div>
-                        <input style="background-color: #85CDE3;" type="submit" value="Send Message">    
-                        <button style="background-color: #85CDE3;" (click)="userDms=true">Return to all Messages</button>
-                    </div>
-                    </form>
-                </div>   
-            </ng-template>
         </div>
     </div>
+
+
+     <!-- User Profile Favorite Section -->
+            <!-- User Profile Favorite Section -->
+            <!-- User Profile Favorite Section -->
+            <br>
+            <br>
+            <div>
+                <div class="card" style="background-color: #0EBB9A;">
+                    <h2>Favorites</h2>
+                </div>
+            </div>
 </div>
 
 <!-- End of First row in User Profile -->
@@ -402,14 +361,7 @@
 </div>
 
 
-<!-- User Profile Favorite Section -->
-<!-- User Profile Favorite Section -->
-<!-- User Profile Favorite Section -->
-<div class="col-3">
-    <div class="card" style="background-color: #0EBB9A;">
-        <h2>Favorites</h2>
-    </div>
-</div>
+
 
 
 <!-- End of 2nd row on User Profile -->

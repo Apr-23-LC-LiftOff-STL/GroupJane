@@ -76,6 +76,11 @@ margin-bottom: 5px;
   width: auto;
 }
 
+placeholder {
+  font-style: italic;
+  line-height: 20px;
+}
+
 
 
 /* end Jami additions */
@@ -121,7 +126,7 @@ margin-bottom: 5px;
   max-width:700px;
   min-height:40px;
   margin:auto;
-  position:relative;
+  /* position:relative; */
   /* align-items:center;
   justify-content:center;
   text-align:center; */
