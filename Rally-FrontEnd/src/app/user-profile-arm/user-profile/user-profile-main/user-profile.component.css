@@ -54,6 +54,20 @@ a {
   text-decoration: underline;
 }
 
+/* .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color:#85CDE3 !important;
+} */
+
+input[type=checkbox] {
+  background-color: #85CDE3;
+}
+
+
+
+/* .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #85CDE3;
+  background-color: #85CDE3;
+} */
 
 .btn {
   background-color: #fff;
