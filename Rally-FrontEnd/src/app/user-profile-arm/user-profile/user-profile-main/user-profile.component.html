@@ -47,7 +47,7 @@
             <div *ngIf="logInStatus" style="margin-top: 140px;"> 
                 <div>
                     <h2 style="font-family: Oswald, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
-                    <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Users</a></button>
+                    <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Profiles</a></button>
                     <!-- <button style="background-color: #85CDE3;" (click)="logOut()">Log Out</button> -->
                 </div>
             </div>
@@ -55,6 +55,9 @@
         </div>
 <!-- Log Out and Search Nav bar  -->
 
+<br>
+<br>
+<br>
 <br>
 <br>
 
@@ -76,7 +79,7 @@
         </ng-template>
         <!-- Button to show upload options for user -->
         <div *ngIf="changeProfilePic; else changePic">
-            <button class="btn btn-outline-info btn-xm"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">change pic</button>
+            <button class="btn btn-link"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">change pic</button>
         </div>
 
         <!-- Upload options -->
@@ -105,11 +108,12 @@
 <span>
 
     <div>
-        <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Profile</h2>
+        <!-- <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Profile</h2> -->
         <div *ngIf="changeInfo; else changeForm"> 
 
         <!-- Display user Information -->
-        <div class="card">
+        <!-- <div class="card" style="background: linear-gradient(to bottom left, #85CDE3, #ffffff 70%);"> -->
+            <div class="card">
             <br> 
             <label>first name<br><h4>{{ userInformation?.firstName }}</h4></label>
             <label>last name<br><h4>{{ userInformation?.lastName}}</h4></label>
@@ -125,8 +129,9 @@
 
         <!-- Form to change/update user information -->
         <ng-template #changeForm>
-        <div class="form-group: card" style=" background: linear-gradient(to bottom left, #F9A605, #ffffff 70%);">
-        <!-- <div class="form-group: card" style="background-color: #f6f4f3">  -->
+        <!-- <div class="form-group: card" style=" background: linear-gradient(to bottom left, #F9A605, #ffffff 70%);"> -->
+            <!-- <div class="form-group: card"> -->
+        <div class="form-group: card" style="background-color: #f6f4f3"> 
             <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
             <br><br>
             <label class="form-label" for="firstName">first name<br>
@@ -190,7 +195,7 @@
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
         <!-- <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px;" *ngIf="userDms; else differentTitle">conversations</h4> -->
-         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">my conversations</h4>
+         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">   </h4>
         <ng-template #differentTitle>
             <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
@@ -228,8 +233,8 @@
                         <br>
                         <td >    
                             <div >
-                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #f6f4f3; float: left;">{{ dm.messageContent }}</tr>
-                                <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; float: right;">{{ dm.messageContent }}</tr>
+                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
+                                <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
                             </div>                          
                         </td>
                         <br>
@@ -241,10 +246,10 @@
                         <h6 style="color: #C03E24;">Minimum of 3 characters required.</h6>
                         </ng-template>
                         <br>
-                        <textarea class="form-control" placeholder="What's on your mind?" rows="3" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
+                        <textarea class="form-control" placeholder="RALLY message:" rows="3" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                         <div *ngIf="noError; else lengthError">
-                        <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="Send Message">   
-                        <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">Back to Conversations</button>
+                        <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="Send">   
+                        <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">Back</button>
                         <br>
                         <br>
                         </div>
@@ -291,9 +296,9 @@
             <div *ngIf="this?.allPost.length === 0"><h3 style="color: #ffffff;">User Does not have any post history</h3></div>
             <!-- Filter to display posts of a specific type -->
             <div>
-                <label class="form-check-label" >my posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                <label class="form-check-label">my events <input class="form-check-input" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
-                <label class="form-check-label">my replies <input class="form-check-input" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" >posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label">events <input class="form-check-input" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label class="form-check-label">replies <input class="form-check-input" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
             </div>
             <!-- Display all posts of all types that user has -->
             <ul *ngFor="let post of this.allPost">
