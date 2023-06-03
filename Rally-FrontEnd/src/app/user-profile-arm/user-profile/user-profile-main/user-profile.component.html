@@ -17,7 +17,7 @@
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="container">
-                        <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'lato';">
+                        <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans' sans-serif;">
                         <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
@@ -44,7 +44,7 @@
 
             <div *ngIf="logInStatus" style="margin-top: 140px;"> 
                 <div>
-                    <h2 style="font-family: Oswald, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
+                    <h2 style="font-family: Open Sans, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
                     <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">SEARCH PROFILES</a></button>
                 </div>
             </div>
@@ -121,14 +121,14 @@
         <ng-template #changeForm>
             <div class="form-group" style="background-color: #f6f4f3"> 
             <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
-            <br><br>
+            <br>
             <label class="form-label" for="firstName">first name<br>
             <input class="form-control" type="text" id="firstName" name="firstName" placeholder={{userInformation?.firstName}} [(ngModel)]="model.firstName" #firstName="ngModel"></label>
-            <br><br>
+            <br>
             <label class="form-label" for="lastName">last name<br>
             <input class="form-control" type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
-            <br><br>
-            <label class="form-label" for="category-drop">neighborhood</label><br>
+            <br>
+            <label class="form-label" for="category-drop">neighborhood</label>
             <select class="form-select" name="neighborhood" id="category-drop" [(ngModel)]="model.neigborhood" #neigborhood="ngModel">
                 <option value="" disabled selected>Select your neighborhood</option>
                 <option value="Compton Heights">Compton Heights</option>
@@ -142,7 +142,7 @@
                 <option value="Midtown">Midtown</option>
             </select>
             <br>
-            <label class="form-label" for="category-drop">city</label><br>
+            <label class="form-label" for="category-drop">city</label>
             <select class="form-select" name="city" id="category-drop" [(ngModel)]="model.city" #city="ngModel">
                 <option value="" disabled selected>Select your city</option>
                 <option value="Saint Louis">Saint Louis</option>
@@ -153,13 +153,13 @@
                 <option value="Ferguson">Ferguson</option>
             </select> 
             <br>
-            <label class="form-label" for="category-drop">state</label><br>
+            <label class="form-label" for="category-drop">state</label>
             <select class="form-select" name="state" id="category-drop" [(ngModel)]="model.state" #state="ngModel">
                 <option value="" disabled selected>Select your state</option>
                 <option value="Missouri">Missouri</option>
                 <option value="Illinois">Illinois</option>
             </select>
-            <br>
+            <br><br>
             <input class="btn btn-outline-info btn-xm" style="margin-left: 10px;" type="submit" value="Submit">
             <button class="btn btn-outline-info btn-xm" style="margin-left: 5px;" (click)="changeInfo=true">Back</button>
             <br>

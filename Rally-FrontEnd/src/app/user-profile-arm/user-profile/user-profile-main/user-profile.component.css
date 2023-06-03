@@ -2,7 +2,7 @@
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-/* font-family: montserrat, sans-serif; */
+font-family: 'Open Sans', sans-serif;
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -15,7 +15,7 @@ text-decoration: none;
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-/* font-family: montserrat, sans-serif; */
+font-family: 'Open Sans', sans-serif;
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -32,11 +32,11 @@ text-decoration: none;
 
 .myButton {
   background-color: #0EBB9A;
-display: internal;
-color:#ffffff;
-font-family: montserrat, sans-serif;
-font-size:30px;
-font-weight:bold;
+  display: internal;
+  color:#ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-size:30px;
+  font-weight:bold;
   text-shadow: 0.5px 0.5px 0px #000;
 padding:15px 75px;
 text-decoration: none;
@@ -82,25 +82,27 @@ input[type=checkbox] {
 
 
 label {
-font-family: oswald, sans-serif;
-/* font-family: lato; */
+font-family: 'Open Sans', sans-serif;
 font-size: 15px;
-/* font-weight: bolder; */
 margin-left: 10px;
 margin-bottom: 20px;
 }
 
 h4 {
-  font-family: oswald, sans-serif;
-  /* font-family: lato; */
+  font-family: 'Open Sans', sans-serif;
   font-size: 25px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 
 .form-select {
   margin-left: 10px;
   width: auto;
+  margin-bottom: -10px;
+}
+
+#category-drop {
+  margin-top: -15px;
 }
 
 placeholder {
@@ -117,8 +119,6 @@ body {
   /* background: linear-gradient(19deg, #abe7dc, #ffffff 70%);
  min-height: 100%; */
 
-
-    /* background: radial-gradient(circle at top left, #abe7dc, #ffffff 70%); */
     background: radial-gradient(#abe7dc, #ffffff 70%);
 
 
@@ -159,7 +159,7 @@ table {
   div.scroll-posthistory {
     column-width: auto;
     /* height: auto; */
-    height: 828px;
+    height: 865px;
     overflow: auto;
     resize: vertical;
     /* text-align: center; */
@@ -168,7 +168,7 @@ table {
 
   div.scroll-favorites {
     column-width: auto;
-    height: 238px ;
+    height: 275px ;
     overflow: auto;
     resize: vertical;
     padding: 8px;
