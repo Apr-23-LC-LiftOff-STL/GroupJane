@@ -122,10 +122,10 @@
             <div class="form-group" style="background-color: #f6f4f3"> 
             <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
             <br>
-            <label class="form-label" for="firstName">first name<br>
+            <label class="form-label" style="margin-bottom:30px" for="firstName">first name<br>
             <input class="form-control" type="text" id="firstName" name="firstName" placeholder={{userInformation?.firstName}} [(ngModel)]="model.firstName" #firstName="ngModel"></label>
             <br>
-            <label class="form-label" for="lastName">last name<br>
+            <label class="form-label" style="margin-bottom:30px" for="lastName">last name<br>
             <input class="form-control" type="text" name="lastName" id="lastName" placeholder={{userInformation?.lastName}} [(ngModel)]="model.lastName" #lastName="ngModel"></label>                
             <br>
             <label class="form-label" for="category-drop">neighborhood</label>
@@ -202,7 +202,7 @@
                         </ng-template>
                         
                         <div class="card-body">
-                            <p style="text-align: center; font-size: 15px; font-weight: bolder;" (click)="displayConversation(user)">{{ user.userName }}</p>
+                            <p style="text-align: center; font-size: 15px; font-weight: 500;" (click)="displayConversation(user)">{{ user.userName }}</p>
                         </div>
                     </div>
             </ul>
@@ -229,7 +229,7 @@
                         <h6 style="color: #C03E24;">Minimum of 3 characters required.</h6>
                         </ng-template>
                         <br>
-                        <textarea class="form-control" placeholder="RALLY message:" rows="3" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
+                        <textarea class="form-control" placeholder="RALLY message:" rows="2" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                         <div *ngIf="noError; else lengthError">
                         <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="send">   
                         <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">back</button>
@@ -248,7 +248,6 @@
      <!-- User Profile Favorite Section -->
             <!-- User Profile Favorite Section -->
             <!-- User Profile Favorite Section -->
-    <br>
     <br>
     <div>
         <h2>Favorites</h2>
@@ -271,7 +270,7 @@
 
         <div class="card">     
             <div class="scroll-posthistory">
-            <div *ngIf="this?.allPost.length === 0"><h3 style="text-align: center;">No history found at this time.</h3></div>
+            <div *ngIf="this?.allPost.length === 0"><h3 style="text-align: center; margin-top: 30px;">No history found at this time.</h3></div>
             <!-- Filter to display posts of a specific type -->
             <br>
             <div style="text-align: center;">

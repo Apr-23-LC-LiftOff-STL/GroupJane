@@ -86,12 +86,13 @@ font-family: 'Open Sans', sans-serif;
 font-size: 15px;
 margin-left: 10px;
 margin-bottom: 15px;
+margin-top: -10px;
 }
 
 h4 {
   font-family: 'Open Sans', sans-serif;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   /* margin-top: 5px; */
 }
 
@@ -110,7 +111,7 @@ h2 {
 }
 
 #category-drop {
-  margin-top: -15px;
+  margin-top: -10px;
 }
 
 placeholder {
@@ -156,27 +157,23 @@ table {
 
   div.scroll {
     column-width: auto;
-    /* height: 300px; */
     height: 450px;
     overflow: auto;
     resize: vertical;
-    /* text-align: center; */
     padding: 8px;
   }
 
   div.scroll-posthistory {
     column-width: auto;
-    /* height: auto; */
-    height: 840px;
+    height: 793px;
     overflow: auto;
     resize: vertical;
-    /* text-align: center; */
     padding: 8px;
   }
 
   div.scroll-favorites {
     column-width: auto;
-    height: 250px ;
+    height: 225px ;
     overflow: auto;
     resize: vertical;
     padding: 8px;
@@ -184,23 +181,14 @@ table {
 
 .thought {
   display:flex;
-  /* background-color:#e6e0cc; */
-  padding:20px;
+  padding:15px;
   border-radius:30px;
   min-width:200px;
   max-width:700px;
   min-height:40px;
   margin:auto;
   font-size:medium;
-  font-weight: 450;
-
-  /* position:relative; */
-  /* align-items:center;
-  justify-content:center;
-  text-align:center; */
-
-  /* box-sizing: border-box; */
-  
+  font-weight: 450;  
 }
 
 
