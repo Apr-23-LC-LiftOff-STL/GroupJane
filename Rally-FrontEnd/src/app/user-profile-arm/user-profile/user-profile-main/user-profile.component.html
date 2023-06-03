@@ -256,8 +256,8 @@
                         <br>
                         <textarea class="form-control" placeholder="RALLY message:" rows="3" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                         <div *ngIf="noError; else lengthError">
-                        <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="Send">   
-                        <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">Back</button>
+                        <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="send">   
+                        <button class="btn btn-outline-info btn-xm" style="margin-top: 5px; float:left; width: 50%;" (click)="userDms=true">back</button>
                         <br>
                         <br>
                         </div>
@@ -301,12 +301,12 @@
         <!-- <h2>Post History</h2> -->
         <div class="card">     
             <div class="scroll-posthistory">
-            <div *ngIf="this?.allPost.length === 0"><h3>User Does not have any post history</h3></div>
+            <div *ngIf="this?.allPost.length === 0"><h3 style="text-align: center;">No history found at this time.</h3></div>
             <!-- Filter to display posts of a specific type -->
             <div>
                 <label class="form-check-label" style="font-size: 18px;">posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                <label class="form-check-label" style="font-size: 18px;">events <input class="form-check-input" style="background-color: #0EBB9A;" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
-                <label class="form-check-label" style="font-size: 18px;">replies <input class="form-check-input" style="background-color: #F9A605;" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" style="font-size: 18px;">events <input class="form-check-input" style="border-color: #0EBB9A;" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label class="form-check-label" style="font-size: 18px;">replies <input class="form-check-input" style="border-color: #F9A605;" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
             </div>
             <br>
             <!-- Display all posts of all types that user has -->

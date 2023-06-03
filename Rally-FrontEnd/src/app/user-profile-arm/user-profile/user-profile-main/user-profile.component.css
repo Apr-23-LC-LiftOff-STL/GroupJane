@@ -59,7 +59,8 @@ a {
 } */
 
 input[type=checkbox] {
-  background-color: #85CDE3;
+  border-color: #85CDE3;
+ 
 }
 
 
