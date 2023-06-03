@@ -17,7 +17,7 @@
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="container">
-                        <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'montserrat', sans-serif;">
+                        <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'lato';">
                         <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
                         <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
@@ -45,7 +45,7 @@
             <div *ngIf="logInStatus" style="margin-top: 140px;"> 
                 <div>
                     <h2 style="font-family: Oswald, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
-                    <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">Search Profiles</a></button>
+                    <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">SEARCH PROFILES</a></button>
                 </div>
             </div>
 
@@ -273,10 +273,11 @@
             <div class="scroll-posthistory">
             <div *ngIf="this?.allPost.length === 0"><h3 style="text-align: center;">No history found at this time.</h3></div>
             <!-- Filter to display posts of a specific type -->
-            <div>
-                <label class="form-check-label" style="font-size: 18px;">posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                <label class="form-check-label" style="font-size: 18px;">events <input class="form-check-input" style="border-color: #0EBB9A;" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
-                <label class="form-check-label" style="font-size: 18px;">replies <input class="form-check-input" style="border-color: #F9A605;" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+            <br>
+            <div style="text-align: center;">
+                <label class="form-check-label" style="font-size: 15px;">posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" style="font-size: 15px;">events <input class="form-check-input" style="border-color: #0EBB9A;" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label class="form-check-label" style="font-size: 15px;">replies <input class="form-check-input" style="border-color: #F9A605;" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
             </div>
             <br>
             <!-- Display all posts of all types that user has -->
@@ -286,7 +287,7 @@
                 <div *ngIf="post.type === 'ForumPost'">
                     <div class="card-body"  *ngIf="post.hidden === false; else hiddenPost">
                     <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
-                    <h4>{{ post.description }}</h4>
+                    <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
                     <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div>
                     </div>
                 <ng-template #hiddenPost>
@@ -382,4 +383,5 @@
 <br>
 <br> -->
 <!--end of Jami test styling-->
+</html>
 

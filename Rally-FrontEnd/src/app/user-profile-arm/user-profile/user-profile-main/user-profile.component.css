@@ -2,7 +2,7 @@
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-font-family: montserrat, sans-serif;
+/* font-family: montserrat, sans-serif; */
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -15,7 +15,7 @@ text-decoration: none;
   background-color: #0EBB9A;
   text-align: center;
 color:#ffffff;
-font-family: montserrat, sans-serif;
+/* font-family: montserrat, sans-serif; */
 font-size:20px;
   font-weight: 500;
   width: 125px;
@@ -83,10 +83,18 @@ input[type=checkbox] {
 
 label {
 font-family: oswald, sans-serif;
-font-size: 20px;
-font-weight: bolder;
+/* font-family: lato; */
+font-size: 15px;
+/* font-weight: bolder; */
 margin-left: 10px;
-margin-bottom: 5px;
+margin-bottom: 20px;
+}
+
+h4 {
+  font-family: oswald, sans-serif;
+  /* font-family: lato; */
+  font-size: 25px;
+  font-weight: 800;
 }
 
 
@@ -105,12 +113,17 @@ body {
   /* background: linear-gradient(to top left, #86ddcc, #ffffff 50%); */
   /* background: linear-gradient(to top left, #abe7dc, #ffffff 50%); */
   /* background: linear-gradient(to top right, #abe7dc, #ffffff 70%); */
-  /* background: linear-gradient(19deg, #abe7dc, #ffffff 70%); */
 
-    /* background: linear-gradient(to top, #abe7dc, #ffffff 70%); */
-    background: radial-gradient( #abe7dc, #ffffff 80%);
+  /* background: linear-gradient(19deg, #abe7dc, #ffffff 70%);
+ min-height: 100%; */
+
+
+    /* background: radial-gradient(circle at top left, #abe7dc, #ffffff 70%); */
+    background: radial-gradient(#abe7dc, #ffffff 70%);
+
 
 }
+
 
 table {
   height: 20px;

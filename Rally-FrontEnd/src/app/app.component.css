@@ -2,7 +2,7 @@
     background-color: #0EBB9A;
     text-align: center;
 	color:#ffffff;
-	font-family: montserrat, sans-serif;
+	/* font-family: montserrat, sans-serif; */
 	font-size:20px;
     font-weight: 500;
     width: 125px;
@@ -11,9 +11,21 @@
 	text-decoration: none;
 }
 
-.nav-link {
+/* .nav-link {
     color: black;
     font-weight: 450;
     font-size: 15px;
 }
+
+#font1 {
+    font-family:  'Montserrat', sans-serif;
+}
+
+#font2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#font3 {
+    font-family: 'Lato', sans-serif;
+} */
 
