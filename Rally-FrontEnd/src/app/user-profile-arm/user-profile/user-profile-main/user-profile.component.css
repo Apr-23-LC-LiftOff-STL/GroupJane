@@ -49,6 +49,12 @@ a {
   text-decoration: none;
 }
 
+#link {
+  color:#85CDE3;
+  text-decoration: underline;
+}
+
+
 .btn {
   background-color: #fff;
   border-color:  #85CDE3;
@@ -60,6 +66,15 @@ a {
   background-color:  #85CDE3;
   border-color:  #85CDE3;
 }
+
+#btnLink{
+  background-color: white;
+  color:#85CDE3;
+  border: none;
+  transition: none;
+
+}
+
 
 
 label {
@@ -123,7 +138,7 @@ table {
   div.scroll-posthistory {
     column-width: auto;
     /* height: auto; */
-    height: 865px;
+    height: 828px;
     overflow: auto;
     resize: vertical;
     /* text-align: center; */
@@ -132,7 +147,7 @@ table {
 
   div.scroll-favorites {
     column-width: auto;
-    height: 250px ;
+    height: 238px ;
     overflow: auto;
     resize: vertical;
     padding: 8px;

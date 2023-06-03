@@ -69,6 +69,8 @@
 
     <br>
     <br>
+
+    <div class="card">
    
         <div class="card" style="align-content: center;" *ngIf="dbImage; else default">               
             <img [src]="dbImage" width="100%" height="auto">
@@ -79,7 +81,8 @@
         </ng-template>
         <!-- Button to show upload options for user -->
         <div *ngIf="changeProfilePic; else changePic">
-            <button class="btn btn-link"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">change pic</button>
+            <!-- <button class="btn btn-link"  style="float: right; margin-top: 5px;" (click)="changeProfilePic=false">change pic</button> -->
+            <button class="btn btn-outline-info btn-xm"  id="btnLink" style="width: 100%; text-align: right;" (click)="changeProfilePic=false">change pic</button>
         </div>
 
         <!-- Upload options -->
@@ -101,11 +104,11 @@
 
 <!-- User Information -->
 
+<!-- <br>
+<br> -->
 <br>
-<br>
-<!-- <br> -->
 
-<span>
+<!-- <span> -->
 
     <div>
         <!-- <h2 style="font-family: Oswald, sans-serif; font-size: 35px; font-weight: 600 ">Profile</h2> -->
@@ -113,17 +116,19 @@
 
         <!-- Display user Information -->
         <!-- <div class="card" style="background: linear-gradient(to bottom left, #85CDE3, #ffffff 70%);"> -->
-            <div class="card">
+            <!-- <div class="card"> -->
+            <div>
             <br> 
-            <label>first name<br><h4>{{ userInformation?.firstName }}</h4></label>
-            <label>last name<br><h4>{{ userInformation?.lastName}}</h4></label>
-            <label>neigborhood<br><h4>{{ userInformation?.neighborhood}}</h4></label>
-            <label>city<br><h4>{{ userInformation?.city}}</h4></label>
-            <label>state<br><h4>{{ userInformation?.state}}</h4></label>  
+            <label>first name<br><h4>{{ userInformation?.firstName }}</h4></label><br>
+            <label>last name<br><h4>{{ userInformation?.lastName}}</h4></label><br>
+            <label>neigborhood<br><h4>{{ userInformation?.neighborhood}}</h4></label><br>
+            <label>city<br><h4>{{ userInformation?.city}}</h4></label><br>
+            <label>state<br><h4>{{ userInformation?.state}}</h4></label><br> 
             <div>
                 <button class="btn btn-outline-info btn-xm" style="margin-left: 10px; margin-top: 5px;" (click)="editProfileDetails()">update</button> 
             </div>
             <br>
+            <!-- <br> -->
         </div>
         </div>
 
@@ -131,7 +136,8 @@
         <ng-template #changeForm>
         <!-- <div class="form-group: card" style=" background: linear-gradient(to bottom left, #F9A605, #ffffff 70%);"> -->
             <!-- <div class="form-group: card"> -->
-        <div class="form-group: card" style="background-color: #f6f4f3"> 
+        <!-- <div class="form-group: card" style="background-color: #f6f4f3">  -->
+            <div class="form-group" style="background-color: #f6f4f3"> 
             <form #userDetails="ngForm" (ngSubmit)="updateUserInfo(userDetails)">
             <br><br>
             <label class="form-label" for="firstName">first name<br>
@@ -182,7 +188,9 @@
     </div>
 
 
-</span>
+<!-- </span> -->
+
+</div>
 
 </div>
 
@@ -296,62 +304,80 @@
             <div *ngIf="this?.allPost.length === 0"><h3 style="color: #ffffff;">User Does not have any post history</h3></div>
             <!-- Filter to display posts of a specific type -->
             <div>
-                <label class="form-check-label" >posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
-                <label class="form-check-label">events <input class="form-check-input" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
-                <label class="form-check-label">replies <input class="form-check-input" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" style="font-size: 18px; color:#85CDE3" >posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
+                <label class="form-check-label" style="font-size: 18px; color:#0EBB9A" >events <input class="form-check-input" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
+                <label class="form-check-label" style="font-size: 18px; color:#F9A605">replies <input class="form-check-input" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
             </div>
+            <br>
             <!-- Display all posts of all types that user has -->
-            <ul *ngFor="let post of this.allPost">
-            <div class="card" style="background-color: #ecdfc3;">
+            <ul *ngFor="let post of this.allPost" style="padding: 0px; margin: 5px;">
+            <!-- <div class="card" style="background-color: #ecdfc3;"> -->
+                <div class="card">
                 <!-- Display ForumPost objects -->
                 <div *ngIf="post.type === 'ForumPost'">
-                    <div *ngIf="post.hidden === false; else hiddenPost">
-                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
-                    <h6>{{ post.description }}</h6>
-                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                    <div class="card-body"  *ngIf="post.hidden === false; else hiddenPost">
+                    <!-- <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
+                    <h4>{{ post.description }}</h4>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div>
                     </div>
                 <ng-template #hiddenPost>
-                    <div class="card"  style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
-                    <h6>{{ post.description }}</h6>
-                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="unhidePost(post)">Unhide Post?</button>
-                    <p>This post is hidden.</p>
+                    <!-- <div class="card"  style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <div class="card-body">
+                    <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a>
+                        <p style=" font-size: 15px; font-style: italic;">(hidden)</p></h1>
+                    <h4>{{ post.description }}</h4>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="unhidePost(post)">show</button>
+                    <!-- <p>This post is hidden.</p> -->
+                    </div>
                     </div>
                 </ng-template>
                 </div>
+
+
                 <!-- Display ForumReply objects -->
                 <!-- *Undecided: If ForumReply should be viewable with posts or have its own section* -->
                 <div *ngIf="post.type === 'ForumReply'">
-                    <div *ngIf="post.hidden === false; else hiddenPost">
-                    <div class="card"  style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
-                    <h6>{{ post.description }}</h6>
+                    <div class="card-body" *ngIf="post.hidden === false; else hiddenPost">
+                    <!-- <div class="card"  style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
+                    <h4>{{ post.description }}</h4>
                     <!-- <div style="text-align: left;"><button type="button" (click)="hidePost(post)" >Hide this Post</button></div> -->
                     </div>
                 <ng-template #hiddenPost>
-                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active">{{ post.title }}</a></h3>
-                    <h6>{{ post.description }}</h6>
+                    <!-- <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <div class="card-body">
+                    <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a>
+                        <p style=" font-size: 15px; font-style: italic;">(hidden)</p></h1>
+                    <h4>{{ post.description }}</h4>
                     <!-- <div style="text-align: left;"><button type="button" (click)="unhidePost(post)">Unhide Post?</button> -->
-                    <p>This post is hidden.</p>
+                    <!-- <p>This post is hidden.</p> -->
+                    </div>
                     <!-- </div> -->
                 </ng-template>
                 </div>
+
+
                 <!-- Display Event objects -->
                 <div *ngIf="post.type === 'Event'">
-                    <div *ngIf="post.hidden === false; else hiddenPost">
-                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3><a>{{ post.title }}</a></h3>
-                    <h6>{{ post.description }}</h6>
-                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                    <div class="card-body" *ngIf="post.hidden === false; else hiddenPost">
+                    <!-- <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <h1><a>{{ post.title }}</a></h1>
+                    <h4>{{ post.description }}</h4>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
                     </div>
                 <ng-template #hiddenPost>
-                    <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div>
-                    <h3>{{ post.title }}</h3> <a routerLink='/forum/post/{{post.id}}' routerLinkActive="active"></a>
-                    <h6>{{ post.description }}</h6>
-                    <div style="text-align: left;"><button style="background-color: #85CDE3;" type="button" (click)="unhidePost(post)">Unhide Post?</button>
-                    <p>This post is hidden.</p>
+                    <!-- <div class="card" style="background-color: #F9A605"><h6>{{ post.type }}</h6></div> -->
+                    <div class="card-body">
+                    <!-- <h1>{{ post.title }}</h1> <a routerLink='/forum/post/{{post.id}}' routerLinkActive="active"></a> -->
+                    <!--are you wanting the link inside h1???-->
+                    <h1>{{ post.title }}
+                        <p style=" font-size: 15px; font-style: italic;">(hidden)</p>
+                    </h1>
+                    <h4>{{ post.description }}</h4>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="unhidePost(post)">Unhide Post?</button>
+                    <!-- <p>This post is hidden.</p> -->
+                    </div>
                     </div>
                 </ng-template>
                 </div>
