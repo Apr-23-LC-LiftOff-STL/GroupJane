@@ -85,12 +85,20 @@ label {
 font-family: 'Open Sans', sans-serif;
 font-size: 15px;
 margin-left: 10px;
-margin-bottom: 20px;
+margin-bottom: 15px;
 }
 
 h4 {
   font-family: 'Open Sans', sans-serif;
   font-size: 25px;
+  font-weight: 700;
+  /* margin-top: 5px; */
+}
+
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 35px;
   font-weight: 700;
 }
 
@@ -159,7 +167,7 @@ table {
   div.scroll-posthistory {
     column-width: auto;
     /* height: auto; */
-    height: 865px;
+    height: 840px;
     overflow: auto;
     resize: vertical;
     /* text-align: center; */
@@ -168,7 +176,7 @@ table {
 
   div.scroll-favorites {
     column-width: auto;
-    height: 275px ;
+    height: 250px ;
     overflow: auto;
     resize: vertical;
     padding: 8px;
