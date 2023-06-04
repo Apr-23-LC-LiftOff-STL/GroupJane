@@ -1,10 +1,10 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>view-user-profile</title>
-      </head>
+      </head> -->
 
 
 
@@ -98,10 +98,9 @@
                                         <br>
                                         <td>
                                             <div >
-                                                <!-- {{ this?.viewUserName }} -->
-
-                                                <tr *ngIf="this.viewUserName === dm.sentByUserName" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
-                                                <tr *ngIf="this.viewUserName !== dm.receivedByUserName" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
+                                                
+                                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
+                                                <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
 
                                                 <!-- <tr *ngIf="dm.receivedByUserName !== this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
                                                 <tr *ngIf="dm.sentByUserName !== this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr> -->
