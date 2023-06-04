@@ -47,8 +47,6 @@
                 </div>
                
             </div>
-
-
         </div>
 
         <br>
@@ -59,13 +57,13 @@
             <div class="scroll">
             <br>
             <br>
-                <div class="container">
+                <!-- <div class="container"> -->
                
                 <div class="row">
                     
-                
-                    <!-- <div class="card col-md-3" *ngFor="let user of userList"> -->
                     <div class="card col-md-2 g-0" *ngFor="let user of userList">
+
+                        <!--ALEX: Add db profile pics-->
                         <img src="/assets/user-profile-assets/profile-pic.gif" >
                         <div class="card-body">
                             <p style="text-align: center; font-size: 15px; font-weight: 500;">
@@ -76,110 +74,14 @@
                         
                     </div>
 
-                    </div>
                 </div>
+                
+                <!-- </div> -->
             <br>
             <br>
             </div>
             
-        </div>
-        
-
-        <!-- <div class="row" >
-
-            <div class="card">
-                <div class="scroll">
-                    <br>
-                    <br>
-
-                    <div >
-
-                    <div class="col-md-3" >
-                        <div  class="card" *ngFor = "let user of userList"  > -->
-
-                            <!--ALEX - ADD DB PROFILE PICS-->
-
-                            <!-- <div *ngIf="dbImage; else default">
-                                <img [src]="dbImage" class="card-img-top">
-                            </div> -->
-                            <!-- <img  src="/assets/user-profile-assets/profile-pic.gif" class="card-img-top">
-                            <div class="card-body">
-                                <p style="text-align: center; font-size: 15px; font-weight: 500;">
-                                    <a routerLink="/user/{{user.userName}}/{{user.id}}" routerLinkActive="active">{{ user.userName }}</a></p>
-                            </div>   
-                        </div>
-                    </div>
-
-                    </div>
-
-                    <br>
-                    <br>
-                </div>
-            </div>
-            
-           
-        </div> -->
-        
+        </div> 
 
     </div>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--ALEX STARTS HERE-->
-
-
-<!-- Search bar row container -->
-<!-- <div class="card" style="background-color: #F9A605">
-<div class="row" >
-    <div class="col">
-            <h2>Search</h2>
-    </div> -->
-
-    <!-- Search bar inputs -->
-    <!-- <div class="col">
-        <div class="topnav">
-            <div class="search-container">
-                <form #searchUser="ngForm" (ngSubmit)="searchForUser(searchUser)">
-                <input type="text" placeholder="Search.." name="search" ngModel>
-                <input type="submit" value="Search">
-                <input type="button" (click)="resetResults()" value="Reset Search">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>   
-</div> -->
-
-
-<!-- Display users container/banner -->
-<!-- <div class="card" style="background-color: #F9A605">
-<div class="row">
-    <div class="col">
-        <div class="card" style="background-color: #F9A605">
-            <h2>User Name</h2>
-        </div>
-    </div>
-</div> -->
-<!-- Iterate through the userlist to display results -->
-<!-- <div class="row" *ngFor = "let user of userList">
-    <div class="col">
-        <div class="card" style="background-color: #ecdfc3;">
-            <h2><a routerLink="/user/{{user.userName}}/{{user.id}}" routerLinkActive="active">{{ user.userName }}</a></h2>
-        </div>
-    </div>
-</div> -->
