@@ -1,3 +1,78 @@
+.logInButton {
+  background-color: #0EBB9A;
+  text-align: center;
+color:#ffffff;
+font-family: 'Open Sans', sans-serif;
+font-size:20px;
+  font-weight: 500;
+  width: 125px;
+  height: 65px;
+  padding-top: 20px;
+text-decoration: none;
+}
+
+.logOutButton {
+  background-color: #0EBB9A;
+  text-align: center;
+color:#ffffff;
+font-family: 'Open Sans', sans-serif;
+font-size:20px;
+  font-weight: 500;
+  width: 125px;
+  height: 65px;
+  padding-top: 15px;
+text-decoration: none;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 450;
+  font-size: 15px;
+}
+
+
+input[type=text] {
+  background-color: #f6f4f3;
+}
+
+input[placeholder] {
+  font-style: italic;
+  /* font-size: 15px; */
+}
+
+.form-control {
+  width: 50%;
+  margin-top: -20px;
+}
+
+#rally {
+  margin-right: 3px;
+  margin-left: 8px;
+}
+
+
+.btn {
+  background-color: #fff;
+  border-color:  #85CDE3;
+  transition: all .7s;
+  border-radius: 0;
+}
+.btn:hover {
+  color: #fff;
+  background-color:  #85CDE3;
+  border-color:  #85CDE3;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.card {
+  margin: 5px;
+}
+
+
 .topnav .search-container {
     float: right;
   }

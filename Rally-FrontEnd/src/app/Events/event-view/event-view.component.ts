@@ -145,6 +145,12 @@ filter(string: string) {
     localStorage.clear();
     console.log(localStorage.getItem('userName'))
     this.logInStatus = false;
+
+    this.router.navigate(["/home"])
+    .then(() => {
+      window.location.reload();
+    });
+    
   }
 
 
