@@ -180,9 +180,9 @@
     <h2>Messages</h2>
     <div class="card">
         <!-- Banner that changes based on who your messaging at the top -->
-         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">   </h4>
+         <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">   </h4>
         <ng-template #differentTitle>
-            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
+            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
         </ng-template>
         <!-- Flex box to display user conversations -->
         <div class="card" >
