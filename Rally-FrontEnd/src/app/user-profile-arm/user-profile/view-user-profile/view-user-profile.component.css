@@ -139,7 +139,7 @@ body {
 
   div.scroll-favorites {
     column-width: auto;
-    height: 245px ;
+    height: 270px ;
     overflow: auto;
     resize: vertical;
     padding: 8px;

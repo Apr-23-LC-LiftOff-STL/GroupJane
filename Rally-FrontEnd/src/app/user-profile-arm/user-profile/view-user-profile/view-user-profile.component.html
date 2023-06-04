@@ -41,7 +41,7 @@
         <div class="row">
             <div *ngIf="userReal; else fourOFour"></div>
             <ng-template #fourOFour>
-            <h1 style="color: crimson;">404 USER NOT FOUND</h1>
+            <h1 style="color: #C03E24;">404 USER NOT FOUND</h1>
             </ng-template>
 
             <div *ngIf="logInStatus" style="margin-top: 140px;"> 
@@ -87,11 +87,13 @@
             <div class="col-6">
                 <h2>Messages</h2>
                 <div class="card">
-                    <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;"> {{ viewUserName }}</h4> 
+                    <!-- <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;"> {{ viewUserName }}</h4>  -->
+                    <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-family: oswald, sans-serif; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;"> </h4> 
                     <div class="card">
-                        <div #dmBottomOfScroll class="scroll">
+                        <!-- <div #dmBottomOfScroll class="scroll"> -->
+                            <div >
 
-                            <ng-template #showConversations>
+                            <!-- <ng-template #showConversations> -->
                                 <div class="scroll" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                             <!-- Display the conversation between user and viewed profile -->
                                     <table style="width: 100%;" *ngFor="let dm of conversation">
@@ -99,11 +101,9 @@
                                         <td>
                                             <div >
                                                 
-                                                <tr *ngIf="dm.receivedByUserName === this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
-                                                <tr *ngIf="dm.sentByUserName === this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
+                                                <tr *ngIf="dm.sentByUserName === this.viewUserName" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
+                                                <tr *ngIf="dm.receivedByUserName === this.viewUserName" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
 
-                                                <!-- <tr *ngIf="dm.receivedByUserName !== this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
-                                                <tr *ngIf="dm.sentByUserName !== this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr> -->
                                             </div>  
                                         </td>
                                         <br>
@@ -124,7 +124,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </ng-template>
+                            <!-- </ng-template> -->
 
                         </div>
 
