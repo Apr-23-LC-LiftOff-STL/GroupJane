@@ -1,91 +1,145 @@
-<div style="text-align:center" class="container">
 
-    <div *ngIf="nextFormInfo; else nextForm" class="form-group">
-        <h2>Register</h2>
-        <p>UserName and Passwords must be between 3 to 20 characters</p>
-        <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
-            <br>
-            <label>Enter a user name: <input type="text" name="userName" ngModel></label>        
-            <div *ngIf="noUserNameError; else userNameError"><br><br></div>
-            <label>Enter your password: <input type="password" name="password" ngModel></label>
-            <div *ngIf="passwordForm; else incorrectPassword"><br><br></div>
-            <label>Please re-enter your password: <input type="password" name="verify" ngModel></label>
-            <div *ngIf="passwordMatchIssue; else matchIssue"></div><br><br>
-            <input type="submit" value="Submit">
-
-            <div >
+<header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+            <div class="container">
+            <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="container">
+                    <ul class="nav justify-content-end" style="margin-right: 50px; font-family: 'Open Sans' sans-serif;">
+                    <li class="nav-item"><a class="nav-link" routerLink="/events" routerLinkActive="active">EVENTS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active">FORUMS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">EATS</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active">SERVICES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active">RESOURCES</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active">MY PROFILE</a></li>
+                    </ul>
+                </div>             
+                <a routerLink="/myProfile" routerLinkActive="active" class="logInButton">LOG IN</a>
             </div>
-        </form>       
+            </div>
+        </nav>
     </div>
- 
-    <ng-template #nextForm>
-    <div class="form-group"> 
-        <h2>Register</h2>
-        <p>Names must be between 3 to 20 characters</p>
-        <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
-            <br>
-            <label>First Name: <input type="text" name="firstName" ngModel></label>
-            <div *ngIf="noFirstNameError; else firstNameError"><br><br></div>
-            <label>Last Name: <input type="text" name="lastName" ngModel></label>                
-            <div *ngIf="noLastNameError; else lastNameError"><br><br></div>
-            <br>
-            <h6>Drop down options required</h6>
-            <label for="category-drop">Neighborhood: </label>
-            <select id="category-drop" name="neighborhood" ngModel>
-                <option value="" disabled selected>Select your neighborhood</option>
-                <option value="Compton Heights">Compton Heights</option>
-                <option value="Central West End">Central West End</option>
-                <option value="The Hill">The Hill</option>
-                <option value="Soulard">Soulard</option>
-                <option value="Bevo">Bevo</option>
-                <option value="Gravois Park">Gravois Park</option>
-                <option value="Tower Grove South">Tower Grove South</option>
-                <option value="Downtown">Down Town</option>
-                <option value="Midtown">Midtown</option>
-            </select>
-            <br><br>
-            <label for="category-drop">City:</label>
-            <select id="category-drop" name="city" ngModel>
-                <option value="" disabled selected>Select your city</option>
-                <option value="Saint Louis">Saint Louis</option>
-                <option value="Jennings">Jennings</option>
-                <option value="Clayton">Clayton</option>
-                <option value="University City">University City</option>
-                <option value="Affton">Affton</option>
-                <option value="Ferguson">Ferguson</option>
-            </select>             
-            <br><br>
-            <label for="category-drop">State: </label>
-            <select id="category-drop" name="state" ngModel>
-                <option value="" disabled selected>Select your state</option>
-                <option value="Missouri">Missouri</option>
-                <option value="Illinois">Illinois</option>
-            </select>
-            <br><br>
-            <div *ngIf="createNewUser; else userExists"><br><br></div> 
-            <input type="submit" value="Submit">
-            <button type="button" (click)="clearForms()">Go back</button>
-        </form>
+  </header>
+
+
+  <body>
+    <div class="container" style="margin-top: 120px;">
+
+        <div id="list_head">
+            <p>REGISTER</p> 
+          </div>
+          <br>
+          <br>
+
+        <div class="row">
+            <div class="col-5">
+                
+                <div *ngIf="nextFormInfo; else nextForm" class="form-group">
+                    <!-- <p>UserName and Passwords must be between 3 to 20 characters</p> -->
+                    <form #userInformation="ngForm" (ngSubmit)="registerNewUser(userInformation)">
+                        <br>
+                        <label class="form-label">username</label> 
+                        <input class="form-control form-control-lg" type="text" name="userName" ngModel>     
+                        <div *ngIf="noUserNameError; else userNameError"><br><br></div><br>
+        
+                        <label class="form-label">password</label> 
+                        <input class="form-control form-control-lg" type="password" name="password" ngModel>
+                        <div *ngIf="passwordForm; else incorrectPassword"><br><br></div><br>
+        
+                        <label class="form-label">confirm password</label>
+                        <input class="form-control form-control-lg" type="password" name="verify" ngModel>
+                        <div *ngIf="passwordMatchIssue; else matchIssue"></div><br><br>
+        
+                        <button class="create_btn" type="submit" value="Submit">SUBMIT</button>
+            
+                        <div >
+                        </div>
+                    </form>       
+                </div>
+             
+                <ng-template #nextForm>
+                <div> 
+                    <!-- <h2>Register</h2>
+                    <p>Names must be between 3 to 20 characters</p> -->
+                    <form #userDetails="ngForm" (ngSubmit)="completeRegisteration(userDetails)">
+                        <br>
+                        <label class="form-label">first name</label>
+                        <input class="form-control form-control-lg" type="text" name="firstName" ngModel><br>
+                        <div *ngIf="noFirstNameError; else firstNameError"><br><br></div>
+
+                        <label class="form-label">last name</label> 
+                        <input class="form-control form-control-lg" type="text" name="lastName" ngModel><br>               
+                        <div *ngIf="noLastNameError; else lastNameError"><br><br></div>
+                      
+                        <!-- <h6>Drop down options required</h6> -->
+                        <label class="form-label" for="category-drop">neighborhood</label>
+                        <select class="form-select" id="category-drop" name="neighborhood" ngModel>
+                            <option value="" disabled selected>select</option>
+                            <option value="Compton Heights">Compton Heights</option>
+                            <option value="Central West End">Central West End</option>
+                            <option value="The Hill">The Hill</option>
+                            <option value="Soulard">Soulard</option>
+                            <option value="Bevo">Bevo</option>
+                            <option value="Gravois Park">Gravois Park</option>
+                            <option value="Tower Grove South">Tower Grove South</option>
+                            <option value="Downtown">Down Town</option>
+                            <option value="Midtown">Midtown</option>
+                        </select>
+                        <br><br>
+                        <label class="form-label" for="category-drop">city</label>
+                        <select class="form-select" id="category-drop" name="city" ngModel>
+                            <option value="" disabled selected>select</option>
+                            <option value="Saint Louis">Saint Louis</option>
+                            <option value="Jennings">Jennings</option>
+                            <option value="Clayton">Clayton</option>
+                            <option value="University City">University City</option>
+                            <option value="Affton">Affton</option>
+                            <option value="Ferguson">Ferguson</option>
+                        </select>             
+                        <br><br>
+                        <label class="form-label" for="category-drop">state</label>
+                        <select class="form-select" id="category-drop" name="state" ngModel>
+                            <option value="" disabled selected>select</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Illinois">Illinois</option>
+                        </select>
+                        <br><br>
+                        <div *ngIf="createNewUser; else userExists"><br><br></div> 
+                        <button class="create_btn" type="submit" value="Submit">SUBMIT</button>
+                        <button class="btn btn-outline-info btn-xm" style="margin-top: 10px;" (click)="clearForms()">GO BACK</button>
+                    </form>
+                </div>
+                </ng-template>
+                    <br><br>
+                    <p>Already have an account?  <a routerLink="/login" routerLinkActive="active">LOG IN</a></p>
+        
+
+            </div>
+        </div>
+
+        <ng-template #userNameError>
+            <p style="color: #C03E24">{{ errorUserName }}</p>
+        </ng-template>
+        <ng-template #incorrectPassword>
+            <p style="color: #C03E24">{{ errorPassword }}</p>
+        </ng-template>
+        <ng-template #matchIssue>
+            <p style="color: #C03E24">{{ passWordsDontMatch }}</p>
+        </ng-template>
+        <ng-template #firstNameError>
+            <p style="color: #C03E24">{{ firstNameMessage }}</p>
+        </ng-template>
+        <ng-template #lastNameError>
+            <p style="color: #C03E24">{{ lastNameMessage }}</p>
+        </ng-template>
+        <ng-template #userExists>
+            <p style="color: #C03E24"> {{ postResponseMessage }}</p>
+        </ng-template>
+       
+
     </div>
-    </ng-template>
-        <br><br>
-        <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Login</a></p>
-</div>
-<ng-template #userNameError>
-    <p style="color: crimson">{{ errorUserName }}</p>
-</ng-template>
-<ng-template #incorrectPassword>
-    <p style="color: crimson">{{ errorPassword }}</p>
-</ng-template>
-<ng-template #matchIssue>
-    <p style="color: crimson;">{{ passWordsDontMatch }}</p>
-</ng-template>
-<ng-template #firstNameError>
-    <p style="color: crimson;">{{ firstNameMessage }}</p>
-</ng-template>
-<ng-template #lastNameError>
-    <p style="color: crimson;">{{ lastNameMessage }}</p>
-</ng-template>
-<ng-template #userExists>
-    <p style="color: crimson;"> {{ postResponseMessage }}</p>
-</ng-template>
+  </body>
+

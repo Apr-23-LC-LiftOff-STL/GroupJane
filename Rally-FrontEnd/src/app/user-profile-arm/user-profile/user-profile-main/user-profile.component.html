@@ -278,7 +278,8 @@
             <div *ngIf="this?.allPost.length === 0"><h3 style="text-align: center; margin-top: 30px;">No history found at this time.</h3></div>
             <!-- Filter to display posts of a specific type -->
             <br>
-            <div style="text-align: center;">
+            <!-- <div style="text-align: center;"> -->
+            <div >
                 <label class="form-check-label" style="font-size: 15px;">posts <input class="form-check-input" type="checkbox" name="ForumPost" (change)="userPostHistoryFilter($event)"></label>
                 <label class="form-check-label" style="font-size: 15px;">events <input class="form-check-input" style="border-color: #0EBB9A;" type="checkbox" name="Event" (change)="userPostHistoryFilter($event)" ></label>
                 <label class="form-check-label" style="font-size: 15px;">replies <input class="form-check-input" style="border-color: #F9A605;" type="checkbox" name="ForumReply" (change)="userPostHistoryFilter($event)"></label>
@@ -327,7 +328,7 @@
                     <div class="card-body" *ngIf="post.hidden === false; else hiddenPost">
                     <h1><a style="color: #0EBB9A">{{ post.title }}</a></h1>
                     <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
-                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div>
                     </div>
                 <ng-template #hiddenPost>
                     <div class="card-body">
@@ -337,7 +338,7 @@
                         <p style=" font-size: 15px; font-style: italic;">(hidden)</p>
                     </h1>
                     <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
-                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="unhidePost(post)">Unhide Post?</button></div>
+                    <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="unhidePost(post)">show</button></div>
                     </div>
                 </ng-template>
                 </div>
