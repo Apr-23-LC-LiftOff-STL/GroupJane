@@ -128,36 +128,39 @@ body {
 
 
 
-
-div.scroll {
+  div.scroll {
     column-width: auto;
-    height: 290px;
+    height: 325px;
     overflow: auto;
     resize: vertical;
-    text-align: center;
+    padding: 8px;
+  }
+
+
+  div.scroll-favorites {
+    column-width: auto;
+    height: 245px ;
+    overflow: auto;
+    resize: vertical;
     padding: 8px;
   }
 
   div.scroll-posthistory {
     column-width: auto;
-    height: auto;
+    height: 715px;
     overflow: auto;
     resize: vertical;
-    text-align: center;
     padding: 8px;
   }
 
-.thought {
-  display:flex;
-  background-color:#e0d5d5;
-  padding:20px;
-  border-radius:30px;
-  min-width:200px;
-  max-width:700px;
-  min-height:40px;
-  margin:auto;
-  position:relative;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+  .thought {
+    display:flex;
+    padding:15px;
+    border-radius:30px;
+    min-width:200px;
+    max-width:700px;
+    min-height:40px;
+    margin:auto;
+    font-size:medium;
+    font-weight: 450;  
+  }

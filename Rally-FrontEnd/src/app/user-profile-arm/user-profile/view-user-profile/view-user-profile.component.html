@@ -98,8 +98,13 @@
                                         <br>
                                         <td>
                                             <div >
-                                                <tr *ngIf="dm.receivedByUserName !== this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
-                                                <tr *ngIf="dm.sentByUserName !== this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
+                                                <!-- {{ this?.viewUserName }} -->
+
+                                                <tr *ngIf="this.viewUserName === dm.sentByUserName" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
+                                                <tr *ngIf="this.viewUserName !== dm.receivedByUserName" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr>
+
+                                                <!-- <tr *ngIf="dm.receivedByUserName !== this.currentUser" class="thought" style="background-color: #ffffff; border: 1px solid #0EBB9A; color: #0EBB9A; float: left;">{{ dm.messageContent }}</tr>
+                                                <tr *ngIf="dm.sentByUserName !== this.currentUser" class="thought" style="background-color: #F9A605; color: #ffffff; float: right;">{{ dm.messageContent }}</tr> -->
                                             </div>  
                                         </td>
                                         <br>
@@ -168,7 +173,7 @@
                                         <div class="card-body">
                                         <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
                                         <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
-                                        <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div>
+                                        <!-- <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div> -->
                                         </div>
                                     </div>
 
@@ -177,7 +182,7 @@
                                         <div class="card-body">
                                         <h1><a style="color: #0EBB9A">{{ post.title }}</a></h1>
                                         <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
-                                        <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div>
+                                        <!-- <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div> -->
                                         </div>
                                     </div>
                                  </div>
@@ -195,4 +200,7 @@
 
 
 
-   
+<!--END-->
+
+
+    
