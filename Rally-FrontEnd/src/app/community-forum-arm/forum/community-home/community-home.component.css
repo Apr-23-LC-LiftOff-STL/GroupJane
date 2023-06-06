@@ -30,8 +30,13 @@
   }
 
   body {
-    /* background: radial-gradient(#abe7dc, #ffffff 70%); */
-    background: radial-gradient(#85CDE3, #ffffff 70%);
+    background: radial-gradient(#abe7dc, #ffffff 70%);
+    /* background: radial-gradient(#85CDE3, #ffffff 70%); */
+ 
+  }
+
+  .card.mb-4 {
+    margin-bottom: 0px;
   }
 
   .button1 {

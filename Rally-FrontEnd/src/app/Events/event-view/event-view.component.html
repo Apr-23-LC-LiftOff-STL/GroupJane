@@ -150,35 +150,35 @@
 
                    <div class="card mb-4" style="max-width: 900px;" *ngFor="let event of filteredEvents">
                         
-                    <ng-container *ngIf="filteredEvents.length !== 0">
-                       <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
-                                    <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
-                                    <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
-                                    <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
-                                    <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
-                                </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
-                                    <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
-                                    <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
-                                    <!-- <p style="font-size: 15px; font-style: italic; margin-top: -5px;">hosted by {{event.eventHost}}</p> -->
-                                    <div >
-                                        <p *ngIf="getNumJoined(event.id) !== 0; else signUp" style="font-size: 15px; font-weight: bold; margin-top: 70px;">{{getNumJoined(event.id)}} attending</p>
-                                        <ng-template #signUp>
-                                            <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p> 
-                                            <!-- <p style="font-size: 15px; font-style: italic; margin-top: 70px;">Be the first to sign up!</p>  -->
-                                        </ng-template>
-                                    </div> 
-                                    <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more </a>
+                        <ng-container *ngIf="filteredEvents.length !== 0">
+                            <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img *ngIf="event.eventCategory === 'connect'" src="/assets/events-assets/connect.jpg"  class="card-img img-fluid rounded-start;">
+                                        <img *ngIf="event.eventCategory === 'learn'" src="/assets/events-assets/learn.jpg"  class="card-img img-fluid rounded-start;">
+                                        <img *ngIf="event.eventCategory === 'volunteer'" src="/assets/events-assets/volunteer.jpg"  class="card-img img-fluid rounded-start;">
+                                        <img *ngIf="event.eventCategory === 'donate'" src="/assets/events-assets/donate.jpg"  class="card-img img-fluid rounded-start;">
+                                        <img *ngIf="event.eventCategory === 'celebrate'" src="/assets/events-assets/celebrate.jpg"  class="card-img img-fluid rounded-start;">
+                                    </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <p style="font-family:Oswald, sans-serif; font-weight: 700;  font-size: 15;">{{event.datetime | date:'short'}}</p>
+                                        <p style="font-weight: 800; margin-top: -15px;">{{event.eventTitle}}</p>
+                                        <p style="font-size: 23px; margin-top: -10px;">category: {{event.eventCategory | uppercase}}</p>
+                                        <!-- <p style="font-size: 15px; font-style: italic; margin-top: -5px;">hosted by {{event.eventHost}}</p> -->
+                                        <div >
+                                            <p *ngIf="getNumJoined(event.id) !== 0; else signUp" style="font-size: 15px; font-weight: bold; margin-top: 70px;">{{getNumJoined(event.id)}} attending</p>
+                                            <ng-template #signUp>
+                                                <p style="font-size: 15px; font-style: italic; margin-top: 70px;">hosted by {{event.eventHost}}</p> 
+                                                <!-- <p style="font-size: 15px; font-style: italic; margin-top: 70px;">Be the first to sign up!</p>  -->
+                                            </ng-template>
+                                        </div> 
+                                        <a routerLink="/event/{{event.id}}" routerLinkActive="active" class="btn btn-outline-info btn-xm">learn more </a>
 
-                                   
+                                    
+                                    </div>
                                 </div>
-                            </div>
-                        </div>    
-                    </ng-container>
+                            </div>    
+                        </ng-container>
 
                     </div> 
 
