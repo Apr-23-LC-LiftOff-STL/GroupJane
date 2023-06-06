@@ -61,9 +61,8 @@
         <br>
         <br>
         <br>
-
-        <hr >
-
+        <br>
+        <br>
         <br>
 
         <div class="row">
@@ -72,7 +71,7 @@
             <div class="col-7">
     
                     <div *ngFor="let test of newArray" >
-                        <div class="card">
+                        <div class="card" style="padding: 15px;">
                             <div class="card-body"  style="padding-bottom: 5px;">
                                 <h1><a style="margin-bottom: -7px;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active" id="link" >{{test.title  |  uppercase }}</a></h1> 
                                 <h4><a style="font-size: 15px; font-style: italic; color: black; margin-bottom: 5px;" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">posted by: {{test.userEntity.userName}}</a><br>
