@@ -66,14 +66,10 @@
   }
 
   .button2 {
-    /* background-color: #F9A605; */
     background-color: #ffffff;
 	color:#0d1117;
     border: 2px solid #0d1117;
-	/* font-family:'Raleway', sans-serif; */
 	font-size:22px;
-	/* font-weight:bold; */
-    /* text-shadow: 0.5px 0.5px 0px #000; */
 	padding:6px 24px;
 	text-decoration:none;
     width: 90%;
@@ -85,17 +81,12 @@
 }
 
 .button3{
-    /* background-color: #F9A605; */
     background-color: white;
 	color:#F9A605;
     border: 2px solid #F9A605;
-	/* font-family:'Raleway', sans-serif; */
 	font-size:22px;
-	/* font-weight:bold; */
-    /* text-shadow: 0.5px 0.5px 0px #000; */
 	padding:6px 24px;
 	text-decoration:none;
-    /* width: 75%; */
     width: 90%;
     box-shadow: none;
     margin-left: 15px;
@@ -113,17 +104,12 @@
   }
 
   #link {
-    /* color:#85CDE3; */
-     /* color: #0EBB9A; */
     color: black;
-    /* font-family: 'Open Sans', sans-serif; */
-    /* text-decoration: none; */
     font-size: 30px;
-    /* font-weight: 800; */
     margin-bottom: -5px;
   }
 
-
+/*end Jami add-ons*/
 
 
 

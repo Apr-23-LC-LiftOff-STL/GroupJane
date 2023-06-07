@@ -40,7 +40,6 @@
 
   .button1 {
     background-color: #0EBB9A;
-    /* background-color: #85CDE3; */
     display: internal;
     color:#ffffff;
     font-family: 'Open Sans', sans-serif;
@@ -86,14 +85,12 @@
 }
 
 .button3{
-    /* background-color: white; */
     background-color: black;
 	color:#F9A605;
     border: 2px solid #F9A605;
 	font-size:22px;
 	padding:6px 24px;
 	text-decoration:none;
-    /* width: 75%; */
     width: 90%;
     box-shadow: none;
     margin-left: 15px;
@@ -114,7 +111,6 @@
     color: black;
     text-decoration: none;
     font-size: 35px;
-    /* font-weight: 400; */
   }
 
 
@@ -143,19 +139,12 @@ label {
 .black-background {
     color: white;
     background-color: black;
-    /* border-radius:7px; */
     border: 1px solid #85CDE3;
 }
 
 /*call in light mode???*/
 .white-theme {
-    /* color:black; */
-    /* background-image: linear-gradient(#F9A605, #ffc95e); */
     background-image: radial-gradient(#abe7dc, #ffffff 70%);
-    /* border-radius:7px;
-    display: inline-block;
-    vertical-align: middle;
-    border: 2px solid black; */
 }
 
 
