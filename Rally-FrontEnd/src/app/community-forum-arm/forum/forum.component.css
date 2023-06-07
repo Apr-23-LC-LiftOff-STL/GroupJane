@@ -31,7 +31,7 @@
 
   body {
     background: radial-gradient(#abe7dc, #ffffff 70%);
-    /* background: radial-gradient(#85CDE3, #ffffff 70%); */
+  
   }
 
   .button1 {
@@ -116,10 +116,10 @@
     /* color:#85CDE3; */
      /* color: #0EBB9A; */
     color: black;
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
     /* text-decoration: none; */
     font-size: 30px;
-    font-weight: 700;
+    /* font-weight: 800; */
     margin-bottom: -5px;
   }
 
