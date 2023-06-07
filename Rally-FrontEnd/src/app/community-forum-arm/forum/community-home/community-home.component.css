@@ -31,7 +31,6 @@
 
   body {
     background: radial-gradient(#abe7dc, #ffffff 70%);
-    /* background: radial-gradient(#85CDE3, #ffffff 70%); */
  
   }
 
@@ -48,9 +47,9 @@
     font-size:30px;
     font-weight:bold;
     text-shadow: 0.5px 0.5px 0px #000;
-  padding:15px 75px;
-  text-decoration: none;
-  float: right;
+    padding:15px 75px;
+    text-decoration: none;
+    float: right;
   }
 
   a {
@@ -91,7 +90,8 @@
 }
 
 .button3{
-    background-color: white;
+    /* background-color: white; */
+    background-color: black;
 	color:#F9A605;
     border: 2px solid #F9A605;
 	font-size:22px;
@@ -144,17 +144,29 @@ label {
     width: 100%;
 }
 
-/* .black-background {
+/*call in dark mode*/
+.black-background {
     color: white;
     background-color: black;
-    border-radius:7px;
+    /* border-radius:7px; */
     border: 1px solid #85CDE3;
-} */
+}
+
+/*call in light mode*/
+.white-theme {
+    /* color:black; */
+    /* background-image: linear-gradient(#F9A605, #ffc95e); */
+    background-image: radial-gradient(#abe7dc, #ffffff 70%);
+    /* border-radius:7px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid black; */
+}
 
 
 
 
-.black {
+/* .black {
     background-image: url('../images/black-image.png');
     position: relative; 
     left: 0; 
@@ -167,15 +179,15 @@ label {
     left: 0; 
     right: 0;
     min-height: 900px;
-}
-.white-theme {
+} */
+/* .white-theme {
     color:black;
     background-image: linear-gradient(#F9A605, #ffc95e);
     border-radius:7px;
     display: inline-block;
     vertical-align: middle;
     border: 2px solid black;
-}
+} */
 /* .black-background {
     color:beige;
     background-color: black;
@@ -184,7 +196,7 @@ label {
     vertical-align: middle;
     border: 1px solid rgb(255, 244, 244);
 } */
-.black-theme {
+/* .black-theme {
     color:black;
     background-color: linear-gradient( white, azure);
     border: 1px solid black;
@@ -195,7 +207,7 @@ label {
     font-size:30px;
 	font-weight:bold;
     text-shadow: 2px 2px 0px #000;
-}
+} */
 /* .right{
     float: right;
 }
@@ -205,7 +217,7 @@ label {
 .middle {
     margin: auto;
 } */
-.btn-dark {
+/* .btn-dark {
     font-size:22px;
 	font-weight:bold;
     text-shadow: 1px 1px 0px #000;
@@ -219,7 +231,7 @@ label {
 	font-weight:bold;
     text-shadow: 2px 2px 0px #000;
     color:rgb(255, 255, 255);
-}
+} */
 /* .loginName{
     font-size: 22px;
     font-weight:bolder;
