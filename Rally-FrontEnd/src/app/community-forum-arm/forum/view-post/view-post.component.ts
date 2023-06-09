@@ -6,6 +6,8 @@ import { ReplyDTO } from '../../models/ReplyDTO';
 import { ThemeserviceService } from 'src/app/services/themeservice.service';
 import { map } from 'rxjs/operators';
 import { ForumPost } from '../../models/ForumPost';
+import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
+import { ViewUserService } from 'src/app/user-profile-arm/user-profile/services/view-user.service';
 
 @Component({
   selector: 'app-view-post',
@@ -26,7 +28,9 @@ export class ViewPostComponent implements OnInit {
   updatePostDescription: boolean;
   darktheme: boolean;
   isLoading: boolean;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router) { 
+  replyTooLong: boolean;
+  loginLoading: boolean;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private themeservice: ThemeserviceService, private router: Router, private authorize: AuthorizeService, private activeUserService: ViewUserService) { 
     this.postId = +this.route.snapshot.paramMap.get('id');
     this.postReplyBoolean = false;
     this.logInStatus = false;
@@ -38,12 +42,34 @@ export class ViewPostComponent implements OnInit {
     this.updatePostDescription = false;
     this.darktheme = false;
     this.isLoading = true;
+    this.replyTooLong = false;
+    this.loginLoading = true;
   }
   ngOnInit() {
+    if (this.authorize.isloggedIn() === true) {
+      
+      /* Get all information relevent to user */
+      this.activeUserService.getMainUserBundleByUserName(this.themeservice.getUserName())
+      .subscribe((data: any) => {
+        this.logInStatus = true;
+        this.currentUser = data.viewUser.userName
+        this.loginLoading = false;
+      },  err => {
+        if (err.status === 500) {
+          this.logInStatus = false;
+          this.loginLoading = false;
+          this.currentUser = null;
+          this.themeservice.logOut();
+        }
+      })
+  }
+  else {
+    this.themeservice.logOut();
+    this.logInStatus = false;
+    this.loginLoading = false;
+  }
     this.getPost();
-    this.verifyLoggedIn();
     this.checkTheme();
-    this.getReplies();
   }
   checkTheme(){
     if (localStorage.getItem('theme') == 'dark'){
@@ -58,10 +84,14 @@ export class ViewPostComponent implements OnInit {
         if(post != null){
           this.postObject = post;
           this.isLoading = false;
+          this.postEditAndDeleteButtons = true;
+          this.updatePostDescription = false;
         }
       })
+      this.getReplies();
   }
   getReplies(){
+    this.replies = [];
     this.http.get('http://localhost:8080/Replies').subscribe((res)=> {
         for(const k in res){
           if(res[k].forumPosts.id == this.postId){
@@ -79,6 +109,11 @@ export class ViewPostComponent implements OnInit {
     })
   }
   createReply(replyInformation: NgForm){
+      this.replyTooLong = false;
+      if (replyInformation.value.description.length > 245){
+          this.replyTooLong = true;
+      }
+      else {
       this.postReplyBoolean = false;
       let replyDetails: ReplyDTO ={
         description: replyInformation.value.description,
@@ -86,12 +121,15 @@ export class ViewPostComponent implements OnInit {
         id: this.postId
       }
       this.http.post(`http://localhost:8080/Replies`, replyDetails).subscribe((res) => {
-    console.log(res)
+    this.getPost();
     });
-    window.location.reload();
+  }
   }
   populateForm(){
     this.postReplyBoolean = true;
+  }
+  cancelCreateReply(){
+    this.postReplyBoolean = false;
   }
   editDescription(idString){
     this.editAndDeleteButtons = false;
@@ -99,18 +137,16 @@ export class ViewPostComponent implements OnInit {
     this.editReplyDescription1 = idString;
   }
   logOut() {
-    localStorage.removeItem('userName');
-    this.currentUser = null;
-    console.log(localStorage.getItem('userName'));
     this.logInStatus = false;
+    this.themeservice.logOut();
   }
-  verifyLoggedIn() {
-    if (localStorage.getItem('userName') != null) {
-      this.currentUser = localStorage.getItem('userName');
-      this.logInStatus = true;
-    }
-  }
+
   updateDescription1(updateInformation: NgForm){
+    this.replyTooLong = false;
+    if (updateInformation.value.newDescription.length > 245){
+        this.replyTooLong = true;
+    }
+    else {
     let newReplyDescription: ReplyDTO = {
         description: updateInformation.value.newDescription,
         username: updateInformation.value.username,
@@ -123,15 +159,28 @@ export class ViewPostComponent implements OnInit {
     this.updateDescription = false;
     });
   }
+  }
   editPost(){
     this.postEditAndDeleteButtons = false;
     this.updatePostDescription = true;
   }
+  cancelPostDescription(){
+    this.getPost();
+  }
+  cancelReplyDescription(){
+    this.editAndDeleteButtons = true;
+    this.updateDescription = false;
+  }
   editPostWithNewDescription(updateDescription: NgForm){
+    this.replyTooLong = false;
+    if (updateDescription.value.newDescription.length > 245){
+        this.replyTooLong = true;
+    }
+    else {
       let newPostDescription: ReplyDTO = {
         description: updateDescription.value.newDescription,
-        username: this.postObject[0].userEntity.userName,
-        id: this.postObject[0].id
+        username: this.postObject.userEntity.userName,
+        id: this.postObject.id
       }
       console.log(newPostDescription)
       this.http.post(`http://localhost:8080/UpdatePost`, newPostDescription).subscribe((res) => {
@@ -139,19 +188,20 @@ export class ViewPostComponent implements OnInit {
         this.postEditAndDeleteButtons = true;
         this.updatePostDescription = false;
       })
+    }
   }
   deletePost(idString){
     this.http.post('http://localhost:8080/DeletePost', +idString).subscribe((res) => {
       console.log(res);
-      this.router.navigate(["/forum/" + this.postObject[0].category.toLowerCase()]);
+      this.router.navigate(["/forum/" + this.postObject.category.toLowerCase()]);
     })
   }
   Light(){
-    this.themeservice.switchToLightTheme();
     this.darktheme = false;
+    localStorage.setItem('theme', 'light')
 }
-  Dark(){
-    this.themeservice.switchToDarkTheme();
-    this.darktheme = true;
+Dark(){
+  this.darktheme = true;
+  localStorage.setItem('theme', 'dark')
 }
 }

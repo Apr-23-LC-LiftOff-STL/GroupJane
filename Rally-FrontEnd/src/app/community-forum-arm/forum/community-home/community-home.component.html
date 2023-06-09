@@ -1,91 +1,483 @@
 
 <div class="marginResetting">
-<div class="buttonsPosition">
+    <div *ngIf="darktheme; else lightTheme">
+        <header class="blackheader" style="position: relative;">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(0, 0, 0); border-bottom: 1px solid #fffdfd; padding: 15px;">
+                    <div class="container">
+                    <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                        <img src="/assets/home-assets/rally_logo.png" alt="" height="75" width="80">
+                    </a>
+                    <div class="centering" id="navbarSupportedContent">
+                        <div style="text-align: center;" >
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="beigecolor">EVENTS</span></a></li>
+                                <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="beigecolor">FORUMS</span></a></li>
+                                <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">EATS</span></a></li>
+                                <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">SERVICES</span></a></li>
+                                <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="beigecolor">RESOURCES</span></a></li>
+                                <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="beigecolor">MY PROFILE</span></a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+                    <div *ngIf="!loginLoading">
+                        <div *ngIf="logInStatus; else notLoggedIn">
+                            <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                        </div>
+        
+                            <ng-template #notLoggedIn>
+                                <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                            </ng-template>
+                        </div>
+                </nav>
+            </div>
+          </header>
+        <div class="blackbody">
+      
+          <div class="container">
+      
+              <div class="row">
+      
+                  <!-- <div *ngIf="logInStatus" style="margin-top: 140px;">  -->
+                      <div> 
+                      <div>
+                          <!-- <h2 style="font-family: 'Open Sans', sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Community Home</h2> -->
+                          <div *ngIf="!createPostBoolean; else createPostForm">   
+                              <div *ngIf="logInStatus">
+                                  <button (click)="createPostButton()" class="button1" style="background-color:#85CDE3;">CREATE POST</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+      
+              </div>
+      
+              <br>
+              <br>
+             
+              <div class="row">
+                  <div class="col-8">
+                       <p style="font-family: 'Open Sans', sans-serif; font-size: 40px; font-weight: 800; color: white;">Community Home</p>
+                      <hr style="height:4px; color:#85CDE3; background-color:#85CDE3"><br>
+                  </div>
+              </div>
+      
+              <div class="row">
+      
+              
+                  <div class="col-8">
+                      <div class="card mb-4" *ngFor="let test of newArray" style="margin-bottom: 0px; height: 180px; background-color: black; border: 2px solid #85CDE3;" >
+                          <div class="row g-0" >
+                              <div class="col-md-2" style="padding: 15px; text-align: center;">
+                                  <!--ADAM: CAN YOU ADD CODE FOR USER PROFILE PICS FROM DB HERE???-->
+                                  <img src="/assets/user-profile-assets/profile-pic.gif" class="card-img img-fluid rounded-start;">
+                                  <p style="margin-top: 10px;"><a style="font-size: 15px;" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a></p>
+                              </div>
+                              <div class="col-md-10">
+                                  <div class="card-body">
+                                      <p><a style="margin-bottom: -15px; color: white;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active" id="link" >{{test.title }}</a></p> 
+                                      <!-- <p><a style="font-size: 15px; font-style: italic; color: white;; margin-bottom: 5px;" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">posted by: <span style="font-weight: bold;">{{test.userEntity.userName}}</span></a></p> -->
+                                          <div *ngIf="logInStatus; else notLoggedIn">
+                                             <div>
+                                                  <button style="border: none; background-color: black; margin-left: -5px;" (click)="LikePost(test.id)"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#85CDE3" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                                                      <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                                                  </svg>
+                                                  </button>
+                                                  <span><a style="font-size: 20px;  margin-left: -5px; font-weight: 500;color: #85CDE3;" (click)="LikePost(test.id)" routerLinkActive="active"> {{test.forumPostLike.likes}}</a></span>
+                                              </div>
+                                          </div> 
+                                          <ng-template #notLoggedIn>
+                                            <div>
+                                                <button style="border: none; background-color: black; margin-left: -5px;" (click)="login()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#85CDE3" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                                                    <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                                                </svg>
+                                                </button>
+                                                <span><a style="font-size: 20px;  margin-left: -5px; font-weight: 500;color: #85CDE3;" routerLink="/login" routerLinkActive="active"> {{test.forumPostLike.likes}}</a></span>
+                                            </div>
+                                          </ng-template>
+                                  </div>
+                              </div>
+                                 
+                          </div>
+                          <br>
+                      </div>
+                  </div>
+                  <!--FORUM POST LIST-->
+      
+                  <div class="col-1"></div>
+      
+                  <div class="col-3">
+                      
+                      <div class="card" style="background-color: black; border-color:3px solid #85CDE3;">
+                          <br>
+                          <div *ngIf="logInStatus">
+                          <h5 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 700; text-align: center; padding: 7px; color: white;">Hi, {{currentUser}} </h5>
+                              
+                          <!--ADAM: CAN YOU ADD CODE FOR USER'S PROFILE PICS???-->
+  
+                              <div  style="padding: 15px;">
+                                  <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
+                              </div>
+                          
+                          </div>
+                          <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+                              <div style="margin-left: 15px; margin-right: 15px;">
+                                  <input class="form-control form-control-lg" type="text" placeholder="find posts" name="description" required ngModel>
+                                  <input class="btn btn-outline-info btn-xm" style="margin-top: 5px; width: 100%;" type="submit" value="search">
+                              </div>
+                          </form>
+                          <br><br>
+                          <div *ngIf="darktheme; else lightTheme">
+                              <button class="button3" (click)="Light()">lights on</button>
+                          </div>
+                          <ng-template #lightTheme>
+                              <div>
+                                  <button  class="button2" (click)="Dark()">lights out</button>
+                              </div>
+                          </ng-template>
+                          <br>
+      
+                      </div>
+                      <!--LOGGED IN USER PIC, SEARCH POSTS, LIGHTS OFF/ON-->
+      
+                  </div>
+      
+      
+              </div>
+      
+              <ng-template #createPostForm>
+                  <div *ngIf="logInStatus">
+                      <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
+                          <div *ngIf="darktheme; else lightForm">
+                              <div class="row">
+                                  <div class="col-3"></div>
+                                  <div class="col-6">
+                                  <div class="card md-6" style="padding: 75px;" class="black-background">
+                                      <p style="font-size: 25px; font-family: 'Open Sans', sans-serif;  color:#85CDE3;">Say Something!</p><br>
+                                      <label class="form-label">title </label>
+                                      <input class="form-control" type="text" name="title" required ngModel>
+                                                  <br>
+                                      <label class="form-label">description </label> 
+                                      <input class="form-control" type="text" name="description" required ngModel>    
+                                                  <br>
+                                      <input class="button-dark" type="submit" value="submit"><br><br>
+                                  </div>
+                                  </div>
+                                  </div>
+                          </div>
+                          <!--submit form dark mode-->
+      
+                          <ng-template #lightForm>
+                              <div class="row">
+                              <div class="col-3"></div>
+                              <div class="col-6">
+                              <div class="card md-6" style="padding: 75px;">
+                                  <p style="font-size: 25px; font-family: 'Open Sans', sans-serif; font-weight: bolder;">Say Something!</p><br>
+                                  <label class="form-label">title </label>
+                                  <input class="form-control" type="text" name="title" required ngModel>
+                                              <br>
+                                  <label class="form-label">description </label> 
+                                  <input class="form-control" type="text" name="description" required ngModel>    
+                                              <br>
+                                  <input type="submit" class="button-light" value="submit"><br><br>
+                              </div>
+                              
+                              </div>                        
+                              </div>
+                          </ng-template>
+                          <!--submit form light mode-->
+                      </form>
+                  </div>
+              </ng-template>
+      
+      
+          </div>
+        </div>
+      </div>
+      
+       
+      <ng-template #lightTheme>
+        <header style="position: relative;">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+                    <div class="container">
+                    <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                        <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+                    </a>
+                    <div class="centering" id="navbarSupportedContent">
+                        <div style="text-align: center;" >
+                            <ul class="nav justify-content-end">
+                            <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="blackcolor">EVENTS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="blackcolor">FORUMS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">EATS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">SERVICES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="blackcolor">RESOURCES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="blackcolor">MY PROFILE</span></a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+                    <div *ngIf="!loginLoading">
+                        <div *ngIf="logInStatus; else notLoggedIn">
+                            <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                        </div>
+        
+                            <ng-template #notLoggedIn>
+                                <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                            </ng-template>
+                        </div>
+                </nav>
+            </div>
+          </header>
+      <body>
+      
+          <div class="container">
+      
+              <div class="row">
+      
+                  <!-- <div *ngIf="logInStatus" style="margin-top: 140px;">  -->
+                      <div style="margin-top: 120px;"> 
+                      <div>
+                          <!-- <h2 style="font-family: 'Open Sans', sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Community Home</h2> -->
+                          <div *ngIf="!createPostBoolean; else createPostForm">   
+                              <div *ngIf="logInStatus">
+                                  <button (click)="createPostButton()" class="button1">CREATE POST</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+      
+              </div>
+      
+              <br>
+              <br>
+             
+      
+              <div class="row">
+                  <div class="col-8">
+                       <p style="font-family: 'Open Sans', sans-serif; font-size: 40px; font-weight: 800; margin-bottom: -15px;">Community Home</p>
+                      <hr style="height:4px; color: black; background-color: black"><br>
+                  </div>
+              </div>
+      
+              <div class="row">
+      
+              
+                  <div class="col-8">
+                      <div class="card mb-4" *ngFor="let test of newArray" style="margin-bottom: 0px; height: 180px" >
+                          <div class="row g-0">
+                              <div class="col-md-2" style="padding: 15px; text-align: center;">
+                                  <!--ADAM: CAN YOU ADD CODE FOR USER PROFILE PICS FROM DB HERE???-->
+                                  <img src="/assets/user-profile-assets/profile-pic.gif" class="card-img img-fluid rounded-start;">
+                                  <p style="margin-top: 10px;"><a style="font-size: 15px; color: black; font-weight: bold;" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a></p>
+                              </div>
+                              <div class="col-md-10">
+                                  <div class="card-body">
+                                      <p><a style="margin-bottom: -15px;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active" id="link" >{{test.title }}</a></p><br><br> 
+                                      <!-- <p><a style="font-size: 15px; font-style: italic; color: black; margin-bottom: 5px;" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">posted by: <span style="font-weight: bold;">{{test.userEntity.userName}}</span></a></p> -->
+                                      <!-- <p><a style="font-size: 15px; color: black; font-weight: bold; margin-bottom: 5px;" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a></p> -->
+                                          <div *ngIf="logInStatus; else notLoggedIn">
+                                             <div>
+                                                  <button style="border: none; background-color: white; margin-left: -5px;" (click)="LikePost(test.id)"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#85CDE3" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                                                      <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                                                  </svg>
+                                                  </button>
+                                                  <span><a style="font-size: 20px;  margin-left: -5px; font-weight: 500;color: #85CDE3;" (click)="LikePost(test.id)" routerLinkActive="active"> {{test.forumPostLike.likes}} </a></span>
+                                              </div>
+                                          </div> 
+                                          <ng-template #notLoggedIn>
+                                            <div>
+                                                <button style="border: none; background-color: white; margin-left: -5px;" (click)="login()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#85CDE3" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                                                    <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+                                                </svg>
+                                                </button>
+                                                <span><a style="font-size: 20px;  margin-left: -5px; font-weight: 500;color: #85CDE3;" routerLink="/login" routerLinkActive="active"> {{test.forumPostLike.likes}} </a></span>
+                                            </div>
+                                          </ng-template>
+                                  </div>
+                              </div>
+                                 
+                          </div>
+                          <br>
+                      </div>
+                  </div>    
+                  <!--FORUM POST LIST-->
+      
+                  <div class="col-1"></div>
+      
+                  <div class="col-3">
+      
+                      <div class="card">
+                          <br>
+                          <div *ngIf="logInStatus">
+                          <h5 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 700; text-align: center; padding: 7px;">Hi, {{currentUser}} </h5>
+                              
+                          <!--ADAM: CAN YOU ADD CODE FOR USER'S PROFILE PICS???-->
+                              <div  style="padding: 15px;">
+                                  <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
+                              </div>
+                          
+                          </div>
+                          <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+                              <div style="margin-left: 15px; margin-right: 15px;">
+                                  <input class="form-control form-control-lg" type="text" placeholder="find posts" name="description" required ngModel>
+                                  <input class="btn btn-outline-info btn-xm" style="margin-top: 5px; width: 100%;" type="submit" value="search">
+                              </div>
+                          </form>
+                          <br><br>
+                          <div *ngIf="darktheme; else lightTheme">
+                              <button class="button3" (click)="Light()">lights on</button>
+                          </div>
+                          <ng-template #lightTheme>
+                              <div>
+                                  <button  class="button2" (click)="Dark()">lights out</button>
+                              </div>
+                          </ng-template>
+                          <br>
+      
+                      </div>
+                      <!--LOGGED IN USER PIC, SEARCH POSTS, LIGHTS OFF/ON-->
+                      
+      
+                  </div>
+      
+      
+              </div>
+      
+              <ng-template #createPostForm>
+                  <div *ngIf="logInStatus">
+                      <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
+                          <div *ngIf="darktheme; else lightForm">
+                              <div class="row">
+                                  <div class="col-3"></div>
+                                  <div class="col-6">
+                                      <div class="card md-6" style="padding: 75px;" class="black-background">
+                                          <p style="font-size: 25px; font-family: 'Open Sans', sans-serif;  color:#85CDE3;">Say Something!</p><br>
+                                          <label class="form-label">title </label>
+                                          <input class="form-control" type="text" name="title" required ngModel>
+                                                      <br>
+                                          <label class="form-label">description </label> 
+                                          <input class="form-control" type="text" name="description" required ngModel>    
+                                                      <br>
+                                          <input class="button-dark" type="submit" value="submit"><br><br>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!--submit form dark mode-->
+      
+                          <ng-template #lightForm>
+                              <div class="row">
+                                  <div class="col-3"></div>
+                                  <div class="col-6">
+                                      <div class="card md-6" style="padding: 75px;">
+                                          <p style="font-size: 25px; font-family: 'Open Sans', sans-serif; font-weight: bolder;">Say Something!</p><br>
+                                          <label class="form-label">title </label>
+                                          <input class="form-control" type="text" name="title" required ngModel>
+                                                      <br>
+                                          <label class="form-label">description </label> 
+                                          <input class="form-control" type="text" name="description" required ngModel>    
+                                                      <br>
+                                          <input type="submit" class="button-light" value="submit"><br><br>
+                                      </div>
+                                      
+                                  </div>
+                              </div>
+                          </ng-template>
+                          <!--submit form light mode-->
+                      </form>
+                  </div>
+              </ng-template>
+      
+      
+          </div>
+      </body>
+      </ng-template>
+      
+      
+           
+<!-- <div class="buttonsPosition">
+    <div *ngIf="!loginLoading">
 <span *ngIf="logInStatus; else notLoggedIn">
     <span class="right"><span class="loginName">Logged in as: {{currentUser}} </span><button class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
-</span>
+</span> -->
     <!-- log in button -->
-    <ng-template #notLoggedIn>
-        <p>User is not logged in. </p>
-        <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+    <!-- <ng-template #notLoggedIn>
+        <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
     </ng-template>
+</div> -->
     <!-- log out button -->
-    <span class="left" *ngIf="darktheme; else lightTheme">
+    <!-- <span class="left" *ngIf="darktheme; else lightTheme">
             <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
     </span>
     <ng-template #lightTheme>
         <span class="left">
             <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
         </span>
-    </ng-template> 
+    </ng-template>  -->
         <!-- light/dark theme buttons    -->
-    <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-        <div class="middle">
+    <!-- <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+        <div class="center">
             <input type="text" name="description" required ngModel>
             <input class="btn btn-info" type="submit" value="Search Posts">
         </div>
     </form>
-</div>
+</div> -->
     <!-- search button -->
         <!-- create post button  -->
-    <div id="theme" class="white">
+  <!-- <div *ngIf="!darktheme; else darkSections">
+    <div id="theme" class="white"> -->
     <!-- background theme  -->
-    <body style="min-width: 100%;" class="white-theme">
-            <h1>Community Home</h1>
+    <!-- <body style="min-width: 100%;" class="white-theme">
+            <h1 class="center">Community Home</h1>
     </body>
     <div *ngIf="!createPostBoolean; else createPostForm">   
-        <div *ngIf="logInStatus">
+        <div class="center" *ngIf="logInStatus">
             <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
         </div>
-    </div>
-  
+    </div> -->
     <!-- Page header -->
+            <!-- <br>
             <br>
-            <br>
-            <div *ngIf="darktheme; else lightSections">
-                <div style="text-align: left;" *ngFor="let test of newArray">
-                    
-                    <span *ngIf="logInStatus">
-                        <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
-                    </span>         
-                    <body style="min-width: 90%;" class="black-background">
-                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
-                    </body>
-                    <br><br>
-                </div>
-            </div>
-            <!-- dark theme posts -->
-            <ng-template #lightSections>
+            <div *ngIf="!loginLoading">
                 <div style="text-align: left;" *ngFor="let test of newArray">
                     
                     <span *ngIf="logInStatus">
                         <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
                     </span>         
                     <body style="min-width: 90%;" class="white-theme">
-                        <h3><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h3>
-                        <a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">Posted by {{test.userEntity.userName}}</a> 
-                        <span><a class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.forumPostLike.likes}} likes</a> </span> 
+                        <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                        <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                        <br>
+                        <br>
+                        <div *ngIf="test.forumPostLike.users.length == 0">
+                            <span> Nobody has liked this yet.</span>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 1">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 2">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length > 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                        </div>
                     </body>
                     <br><br>
                 </div>
-            </ng-template>
+            </div> -->
             <!-- light theme posts -->
-</div>
+<!-- </div>
 <ng-template #createPostForm>
     <div *ngIf="logInStatus">
         <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">
-            <div *ngIf="darktheme; else lightForm">
-                <body class="black-background">
-                    <label>Title: <input type="text" name="title" required ngModel></label>
-                                <br><br>
-                    <label>Description: <input type="text" name="description" required ngModel></label>     
-                                <br><br>
-                    <input type="submit" value="Submit">
-                </body>
-            </div>
-            <ng-template #lightForm>
                 <body class="white-theme">
                     <label>Title: <input type="text" name="title" required ngModel></label>
                                 <br><br>
@@ -93,9 +485,72 @@
                                 <br><br>
                     <input type="submit" value="Submit">
                 </body>
-            </ng-template>
         </form>
     </div>
 </ng-template>
+</div>
+<ng-template #darkSections>
+<div id="theme" class="black"> -->
+    <!-- background theme  -->
+    <!-- <body style="min-width: 100%;" class="black-background">
+            <h1 class="center">Community Home</h1>
+    </body>
+    <div *ngIf="!createPostBoolean; else createPostForm">   
+        <div class="center" *ngIf="logInStatus">
+            <button (click)="createPostButton()" class="btn btn-primary">Create Post</button>
+        </div>
+    </div> -->
+    <!-- Page header -->
+            <!-- <br>
+            <br>
+            <div *ngIf="!loginLoading">
+                <div style="text-align: left;" *ngFor="let test of newArray">
+                    
+                    <span *ngIf="logInStatus">
+                        <button  style="font-size: 35px;" class="btn btn-info" (click)="LikePost(test.id)">Like Post</button>
+                    </span>         
+                    <body style="min-width: 90%;" class="black-background">
+                        <h1 class="postTitle"><a style="display: block;" class="nav-link" routerLink="/forum/post/{{test.id}}" routerLinkActive="active">{{test.title}}</a></h1>
+                        <span>Posted by </span><a class="nav-link" routerLink="/user/{{test.userEntity.userName}}/{{test.userEntity.id}}" routerLinkActive="active">{{test.userEntity.userName}}</a> 
+                        <br>
+                        <br>
+                        <div *ngIf="test.forumPostLike.users.length == 0">
+                            <span> Nobody has liked this yet.</span>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 1">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}} likes this</a>
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 2">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a> and
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active">{{test.forumPostLike.users[1].userName}}</a> like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length == 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} other like this
+                        </div>
+                        <div *ngIf="test.forumPostLike.users.length > 3">
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[0].userName}}/{{test.forumPostLike.users[0].id}}" routerLinkActive="active">{{test.forumPostLike.users[0].userName}}</a>,
+                            <a class="nav-link" routerLink="/user/{{test.forumPostLike.users[1].userName}}/{{test.forumPostLike.users[1].id}}" routerLinkActive="active"> {{test.forumPostLike.users[1].userName}}</a> and {{test.forumPostLike.users.length - 2}} others like this
+                        </div>
+                    </body>
+                    <br><br>
+                </div>
+            </div> -->
+            <!-- dark theme posts -->
+<!-- </div>
+<ng-template #createPostForm>
+    <div *ngIf="logInStatus">
+        <form #createdPostAttempt="ngForm" (ngSubmit)="createPost(createdPostAttempt)">            
+                <body class="black-background">
+                    <label>Title: <input type="text" name="title" required ngModel></label>
+                                <br><br>
+                    <label>Description: <input type="text" name="description" required ngModel></label>     
+                                <br><br>
+                    <input type="submit" value="Submit">
+                </body>
+        </form>
+    </div>
+</ng-template>
+</ng-template>   -->
     <!-- create post form  -->
 </div>

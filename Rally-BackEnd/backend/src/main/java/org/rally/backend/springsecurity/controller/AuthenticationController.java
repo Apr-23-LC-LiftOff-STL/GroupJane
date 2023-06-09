@@ -51,6 +51,7 @@ public class AuthenticationController {
     private JWTBlockListRepository jwtBlockListRepository;
 
 
+
     @Autowired
     public AuthenticationController(UserRepository userRepository,
                                     RoleRepository roleRepository,
@@ -61,6 +62,7 @@ public class AuthenticationController {
                                     UserServicesImpl userServicesImpl,
                                     ConfirmationTokenRepository confirmationTokenRepository,
                                     JWTBlockListRepository jwtBlockListRepository) {
+
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userInformationRepository = userInformationRepository;
@@ -69,10 +71,14 @@ public class AuthenticationController {
         this.jwtGenerator = jwtGenerator;
         this.userServicesImpl = userServicesImpl;
         this.confirmationTokenRepository = confirmationTokenRepository;
+
+
+
         this.jwtBlockListRepository = jwtBlockListRepository;
     }
 
     /** Register the user and saves to the repository, but doesn't mark the user as authentic yet **/
+
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
         UserProfileControllerService.generateRoles();

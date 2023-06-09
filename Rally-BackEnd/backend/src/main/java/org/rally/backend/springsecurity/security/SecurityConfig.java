@@ -27,6 +27,7 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
+
     /** Security config for site accessiblity, jwt confirmation, and cors control **/
 
     private JWTAuthEntryPoint authEntryPoint;
@@ -37,8 +38,10 @@ public class SecurityConfig {
         this.authEntryPoint = authEntryPoint;
     }
 
+
     /** Barebones set up atm, but allows for unhindered site exploration. **/
     /** This needs to be configured more for a more secure experience **/
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -55,7 +58,9 @@ public class SecurityConfig {
                 .and()
                 .httpBasic();
 
+
         /** JWT verification check **/
+
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -76,7 +81,9 @@ public class SecurityConfig {
         return new JWTAuthenticationFilter();
     }
 
+
     /** Cors config - barebones config for now. **/
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -3,11 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { EventViewComponent } from './Events/event-view/event-view.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
-import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
-import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 import { FormsModule } from '@angular/forms';
-import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EventComponent } from './Events/event/event.component';
@@ -42,7 +38,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './user-profile-arm/exception/page-not-found/page-not-found.component';
-import { SecurityComponent } from './security/security.component';
+import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
+import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 import { EventJoinComponent } from './Events/event-join/event-join.component';
 import { JoinEditComponent } from './Events/join-edit/join-edit.component';
 import { RestaurantsHomepageComponent } from './restaurants-homepage/restaurants-homepage.component';
@@ -51,10 +48,12 @@ import { RestaurantAsianComponent } from './restaurants-homepage/restaurant-asia
 import { RestaurantsMexicanComponent } from './restaurants-homepage/restaurants-mexican/restaurants-mexican.component';
 import { RestaurantsItalianComponent } from './restaurants-homepage/restaurants-italian/restaurants-italian.component';
 import { RestaurantsPizzaComponent } from './restaurants-homepage/restaurants-pizza/restaurants-pizza.component';
+import { SecurityComponent } from './security/security.component';
+import { SearchUserComponent } from './user-profile-arm/user-profile/search-user/search-user.component';
+import { RegisterUserComponent } from './user-profile-arm/login-register/register-user/register-user.component';
+import { LoginUserComponent } from './user-profile-arm/login-register/login-user/login-user.component';
+import { UserProfileComponent } from './user-profile-arm/user-profile/user-profile-main/user-profile.component';
 
-
-import { httpInterceptorProviders } from './security/Interceptor/jwt-handler.interceptor';
-import { EmailVerificationComponent } from './security/email-verification/email-verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +85,8 @@ import { EmailVerificationComponent } from './security/email-verification/email-
     ViewPostComponent,
     ViewUserProfileComponent,
     UserProfileComponent,
+    SearchComponent,
+    ForumSearchResultsComponent,
     ViewRestaurantComponent,
     ReviewComponent,
     SearchComponent,
@@ -93,11 +94,11 @@ import { EmailVerificationComponent } from './security/email-verification/email-
     SearchRestaurantComponent,
     SortableHeaderDirective,
     ServicePipe,
+    SecurityComponent,
     ServiceItemComponent,
     EventEditComponent,
     HomeComponent,
     PageNotFoundComponent,
-    SecurityComponent,
     EmailVerificationComponent,
     EventJoinComponent,
     JoinEditComponent

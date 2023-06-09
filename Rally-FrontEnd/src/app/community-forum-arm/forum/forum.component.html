@@ -1,72 +1,409 @@
 <div class="marginResetting">
+    <div *ngIf="!darktheme; else darkSections">
+    <header style="position: relative;">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+                <div class="container">
+                <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                    <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+                </a>
+                <div class="centering" id="navbarSupportedContent">
+                    <div style="text-align: center;" >
+                        <ul class="nav justify-content-end">
+                        <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="blackcolor">EVENTS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="blackcolor">FORUMS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">EATS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">SERVICES</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="blackcolor">RESOURCES</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="blackcolor">MY PROFILE</span></a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+                <div *ngIf="!loginLoading">
+                    <div *ngIf="logInStatus; else notLoggedIn">
+                        <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                    </div>
+    
+                        <ng-template #notLoggedIn>
+                            <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                        </ng-template>
+                    </div>
+            </nav>
+        </div>
+      </header>
+      <body>
+
+        <div class="container">
+    
+            <div class="row">
+    
+                <div style="margin-top: 120px;"> 
+                    <div>
+                        <h2 style="font-family: 'Open Sans', sans-serif; font-size: 60px; font-weight: 600; margin-bottom: -60px;">Let's Talk</h2>
+                    
+                    </div>
+                </div>
+    
+            </div>
+    
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
+    
+            <div class="row">
+    
+                <div class="col-8">                   
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-body">
+                            <a routerLink="/forum/communityhome" routerLinkActive="active"  >
+                            <span class="blackcolor"><h1>Community</h1> <hr>Post about, discuss and find out what's going on across the Community. Keep it civil!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-body">
+                            <a routerLink="/forum/introductions" routerLinkActive="active"  >
+                            <span class="blackcolor"><h1>Introductions</h1> <hr>Introduce yourself to the community. Don't be shy, say hi!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic1" routerLinkActive="active"  >
+                            <span class="blackcolor"><h1>Volunteering/Event Recruitment</h1> <hr>Discuss getting together as a group for Events.</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic2" routerLinkActive="active"  >
+                            <span class="blackcolor"><h1>Help Requests/Home Improvement</h1> <hr>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic3" routerLinkActive="active"  >
+                            <span class="blackcolor"><h1>Miscellaneous</h1> <hr>Be as random as you want, but keep it appropiate and civil!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+          
+             
+                </div>
+    
+    
+                <div class="col-1"></div>
+    
+    
+                <div class="col-3">
+    
+                    <div class="card">
+                        <br>
+                        <div *ngIf="logInStatus">
+                        <h5 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 700; text-align: center; padding: 7px;">Hi, {{currentUser}} </h5>
+                            
+                            <div  style="padding: 15px;">
+                                <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
+                            </div>
+                        </div>
+                        
+                        <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+                            <div style="margin-left: 15px; margin-right: 15px;">
+                                <input class="form-control form-control-lg" type="text" placeholder="find posts" name="description" required ngModel>
+                                <input class="btn btn-outline-info btn-xm" style="margin-top: 5px; width: 100%;" type="submit" value="search">
+                            </div>
+                        </form>
+                        <br><br>
+                       
+                        <div *ngIf="darktheme; else lightTheme">
+                            <button class="button3" (click)="Light()">lights on</button>
+                        </div>
+                        <ng-template #lightTheme>
+                            <div>
+                                <button  class="button2" (click)="Dark()">lights out</button>
+                            </div>
+                        </ng-template> 
+                        <br>
+    
+                    </div>
+                </div>
+    
+            </div>
+            <br>
+    
+        </div>   
+    </body>
+</div>    
+<ng-template #darkSections>
+    <header class="blackbody" style="position: relative;">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(0, 0, 0); border-bottom: 1px solid #fffdfd; padding: 15px;">
+                <div class="container">
+                <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                    <img src="/assets/home-assets/rally_logo.png" alt="" height="75" width="80">
+                </a>
+                <div class="centering" id="navbarSupportedContent">
+                    <div style="text-align: center;" >
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="beigecolor">EVENTS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="beigecolor">FORUMS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">EATS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">SERVICES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="beigecolor">RESOURCES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="beigecolor">MY PROFILE</span></a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+                <div *ngIf="!loginLoading">
+                    <div *ngIf="logInStatus; else notLoggedIn">
+                        <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                    </div>
+    
+                        <ng-template #notLoggedIn>
+                            <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                        </ng-template>
+                    </div>
+            </nav>
+        </div>
+      </header>
+      <body class="blackbody">
+
+        <div class="container">
+    
+            <div class="row">
+    
+                <div style="margin-top: 120px;"> 
+                    <div style="color: beige;">
+                        <h2 style="font-family: 'Open Sans', sans-serif; font-size: 60px; font-weight: 600; margin-bottom: -60px;">Let's Talk</h2>
+                    
+                    </div>
+                </div>
+    
+            </div>
+    
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
+    
+            <div class="row">
+
+                <div class="col-8">                   
+                    <div class="card" style="padding: 10px; background-color: black;">
+                        <div class="card-body">
+                            <a routerLink="/forum/communityhome" routerLinkActive="active"  >
+                            <span class="beigecolor"><h1>Community</h1> <hr>Post about, discuss and find out what's going on across the Community. Keep it civil!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px; background-color: black;">
+                        <div class="card-body">
+                            <a routerLink="/forum/introductions" routerLinkActive="active"  >
+                            <span class="beigecolor"><h1>Introductions</h1> <hr>Introduce yourself to the community. Don't be shy, say hi!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px; background-color: black;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic1" routerLinkActive="active"  >
+                            <span class="beigecolor"><h1>Volunteering/Event Recruitment</h1> <hr>Discuss getting together as a group for Events.</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+                    <div class="card" style="padding: 10px; background-color: black;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic2" routerLinkActive="active"  >
+                            <span class="beigecolor"><h1>Help Requests/Home Improvement</h1> <hr>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+    
+                    <div class="card" style="padding: 10px; background-color: black;">
+                        <div class="card-body">
+                            <a routerLink="/forum/topic3" routerLinkActive="active"  >
+                            <span class="beigecolor"><h1>Miscellaneous</h1> <hr>Be as random as you want, but keep it appropiate and civil!</span> 
+                            </a>
+                        </div>  
+                    </div>
+                    <br>
+          
+             
+                </div>
+    
+    
+                <div class="col-1"></div>
+    
+    
+                <div class="col-3">
+                    
+                    <div  class="card">
+                        <div class="blackbody">
+                        <br>
+                        <div *ngIf="logInStatus">
+                        <h5 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 700; text-align: center; padding: 7px; color: beige;">Hi, {{currentUser}} </h5>
+                            
+                            <div  style="padding: 15px;">
+                                <img src="/assets/user-profile-assets/profile-pic.gif" width="100%" height="auto">
+                            </div>
+                        </div>
+                    
+                        <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+                            <div style="margin-left: 15px; margin-right: 15px;">
+                                <input class="form-control form-control-lg" type="text" placeholder="find posts" name="description" required ngModel>
+                                <input class="btn btn-outline-info btn-xm" style="margin-top: 5px; width: 100%;" type="submit" value="search">
+                            </div>
+                        </form>
+                 
+                        <br><br>
+                       
+                        <div *ngIf="darktheme; else lightTheme">
+                            <button class="button3" (click)="Light()">lights on</button>
+                        </div>
+                        <ng-template #lightTheme>
+                            <div>
+                                <button  class="button2" (click)="Dark()">lights out</button>
+                            </div>
+                        </ng-template> 
+                        <br>
+    
+                    </div>
+                </div>
+            </div>
+            </div>
+            <br>
+    
+        </div>   
+    </body>
+</ng-template>
+<!-- <div *ngIf="!loginLoading">
 <div *ngIf="logInStatus; else notLoggedIn">
     <div>
         <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span>  <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
     </div> 
-</div>
+</div> -->
 <!-- log in button -->
-<ng-template #notLoggedIn>
-    <p>User is not logged in. </p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
+<!-- <ng-template #notLoggedIn>
+    <span class="right"><span class="loginName">User is not logged in. </span><a class="btn btn-info" routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a></span>
 </ng-template>
+</div> -->
 <!-- log out button -->
-<div class="left" *ngIf="darktheme; else lightTheme">
+<!-- <div class="left" *ngIf="darktheme; else lightTheme">
         <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
 </div>
 <ng-template #lightTheme>
     <div class="left">
         <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
     </div>
-</ng-template> 
+</ng-template>  -->
     <!-- light/dark theme buttons    -->
-<form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
-    <div class="middle">
+<!-- <form #searchAttempt="ngForm" (ngSubmit)="Search(searchAttempt)">
+    <div class="center">
         <input type="text" name="description" required ngModel>
         <input class="btn btn-info" type="submit" value="Search Posts">
     </div>
-</form>
+</form> -->
 <!-- search button -->
-<div id="theme" class="white">
-<body class="white-theme"><div class="container-fluid"><h1>Community Forum</h1></div></body>
+<!-- <div *ngIf="!darktheme; else darkSections">
+    <div id="theme" class="white">
+        <body class="white-theme"><div class="container-fluid"><h1 class="center">Community Forum</h1></div></body>
 <br><br><br>
-
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home</a></h2>
-        <p>Post about, discuss and find out what's going on across the Community.  Keep it civil!</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home <br><p style="font-size: 18px;">Post about, discuss and find out what's going on across the Community. Keep it civil! </p> </a></h2>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions</a></h2>
-        <p >Introduce yourself to the community. Don't be shy, say hi!</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions <p style="font-size: 18px;">Introduce yourself to the community. Don't be shy, say hi!</p></a></h2>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment</a></h2>
-        <p> Discuss getting together as a group for Events.</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment <p style="font-size: 18px;">Discuss getting together as a group for Events.</p></a></h2>
+            </div>
+        </body>
 <br>
 <br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement</a></h2>
-        <p>Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p>
-    </div>
-</body>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement <p style="font-size: 18px;">Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p></a></h2>
+            </div>
+        </body>
 <br><br>
-<body class="white-theme">
-    <div class="container-fluid" style="text-align: left;">
-        <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous</a></h2>
-        <p>Be as random as you want, but keep it appropiate and civil!</p>
+        <body class="white-theme">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous <p style="font-size: 18px;">Be as random as you want, but keep it appropiate and civil!</p></a></h2>
+            </div>
+        </body>
     </div>
-</body>
-<br><br>
 </div>
+<ng-template #darkSections>
+    <div id="theme" class="black">
+        <body class="black-background"><div class="container-fluid"><h1 class="center">Community Forum</h1></div></body>
+<br><br><br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/communityhome" routerLinkActive="active">Community Home <br><p style="font-size: 18px;">Post about, discuss and find out what's going on across the Community. Keep it civil! </p> </a></h2>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2 ><a class="nav-link" routerLink="/forum/introductions" routerLinkActive="active">Introductions <p style="font-size: 18px;">Introduce yourself to the community. Don't be shy, say hi!</p></a></h2>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic1" routerLinkActive="active">Volunteering/Event Recruitment <p style="font-size: 18px;">Discuss getting together as a group for Events.</p></a></h2>
+            </div>
+        </body>
+<br>
+<br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic2" routerLinkActive="active">Help Requests/Home Improvement <p style="font-size: 18px;">Need a cup of sugar?  Borrow a ladder?  Help moving something heavy?  Discuss here.</p></a></h2>
+            </div>
+        </body>
+<br><br>
+        <body class="black-background">
+            <div class="container-fluid" style="text-align: left;">
+                <h2><a class="nav-link" routerLink="/forum/topic3" routerLinkActive="active">Miscellaneous <p style="font-size: 18px;">Be as random as you want, but keep it appropiate and civil!</p></a></h2>
+            </div>
+        </body>
+    </div>
+</ng-template>
+<br><br> -->
 </div>

@@ -1,54 +1,80 @@
-<div *ngIf="logInStatus; else notLoggedIn">
-    <div>
-        <span class="right"><span  class="loginName"> Logged in as: {{currentUser}}</span>  <button style="position: relative" class="btn btn-info" (click)="logOut()"> Log Out?</button></span>
-    </div> 
-</div>
-<!-- log in button -->
-<ng-template #notLoggedIn>
-    <p>User is not logged in. </p>
-    <a routerLink="/login" routerLinkActive="active" (click)="logInStatus = false">Login</a>
-</ng-template>
-<!-- log out button -->
-<div class="left" *ngIf="darktheme; else lightTheme">
-        <button class="btn btn-warning" (click)="Light()">Turn on the lights</button>
-</div>
-<ng-template #lightTheme>
-    <div class="left">
-        <button class="btn btn-dark" (click)="Dark()">Turn off the lights</button>
-    </div>
-</ng-template> 
-<br><br>
+<div class="marginResetting">
+
     <!-- light/dark theme buttons    -->
-<div id="theme" class="white">
+<div *ngIf="!darktheme; else darkerSections">
+    <header style="position: relative;">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; border-bottom: 1px solid #000; padding: 15px;">
+                <div class="container">
+                <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                    <img src="/assets/home-assets/rally_logo2.jpg" alt="" height="75" width="80">
+                </a>
+                <div class="centering" id="navbarSupportedContent">
+                    <div style="text-align: center;" >
+                        <ul class="nav justify-content-end">
+                        <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="blackcolor">EVENTS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="blackcolor">FORUMS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">EATS</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="blackcolor">SERVICES</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="blackcolor">RESOURCES</span></a></li>
+                        <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="blackcolor">MY PROFILE</span></a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+                <div *ngIf="!loginLoading">
+                    <div *ngIf="logInStatus; else notLoggedIn">
+                        <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                    </div>
+    
+                        <ng-template #notLoggedIn>
+                            <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                        </ng-template>
+                    </div>
+            </nav>
+        </div>
+      </header>
+<body>
     <!-- background theme -->
     <div *ngIf="!isLoading">
-        <div *ngIf="!darktheme; else darkSections">
-            <body class="white-theme">
-                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
-            </body>
-    <!-- Title of Post -->
-                <br><br>
-            <body class="white-theme">
-                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
-            </body>
+        <div class="col-13">
+            <br>
+            <p style="text-align: center;font-family: 'Open Sans', sans-serif; font-size: 40px; font-weight: 800; color: rgb(0, 0, 0);">{{postObject.title}}</p>
+           <hr style="width:60%; margin: auto;height:4px; color:rgb(0, 0, 0); background-color:rgb(0, 0, 0)"><br>
+       </div>
+       <div style="position: absolute; left:0; right: 0;">
+       <div class="floatright">
+        <div style="background-color: rgb(255, 255, 255);" class="card">
+            <h1 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 700; text-align: center; padding: 7px; color: rgb(0, 0, 0);">   
+                Hi, {{currentUser}} 
+            </h1>
+            <div style="text-align: center;">
+                <img src="/assets/user-profile-assets/profile-pic.gif" width="60%" height="40%">
+            </div>
+            <br><br>
+            <div *ngIf="darktheme; else lightTheme">
+                <button class="button3" (click)="Light()">lights on</button>
+            </div>
+            <ng-template #lightTheme>
+                <div>
+                    <button  class="button2" (click)="Dark()">lights out</button>
+                </div>
+            </ng-template>
         </div>
-        <ng-template #darkSections>
-            <body class="black-background">
-                <h1 style="border: 1px solid black;">{{postObject.title}}</h1>
-            </body>
+    </div>
+    </div>
     <!-- Title of Post -->
                 <br><br>
-            <body class="black-background">
-                <h5 style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h5>
+            <body class="white-theme">
+                <h2 class="center" style="padding-top: 5px;">{{postObject.userEntity.userName}} says</h2>
             </body>
-        </ng-template>
     <!-- Username of Poster -->
         <div *ngIf="!updatePostDescription; else editPostDescription">
-            <span><div class="thought">{{postObject.description}}</div></span>
+            <div class="thought">{{postObject.description}}</div>
             <div *ngIf="postObject.userEntity.userName == currentUser">
-                <div *ngIf="postEditAndDeleteButtons">
-                    <button class="btn btn-info" (click)="editPost()">Edit Post Description</button>
-                    <button class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
+                <div class="center" *ngIf="postEditAndDeleteButtons">
+                    <button style="position: relative;" class="btn btn-info" (click)="editPost()">Edit Post Description</button>
+                    <button style="position: relative;" class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
                 </div>
             </div>
                 <br>
@@ -56,75 +82,77 @@
     <!-- Post Description and Edit/Delete Buttons -->
         <ng-template #editPostDescription>
             <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
-                <input type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
-                <input type="submit" value="Submit">
+                <div class="center">
+                <input style="position:relative;" class="form-control" type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                <input style="position:relative;" type="submit" value="Submit">
+                <button (click)="cancelPostDescription()">Cancel</button>
+                <div *ngIf="replyTooLong">
+                    <p style="color:red;">Description is too long, please keep it under 245 characters.</p>
+                </div>
+                </div>
             </form>
         </ng-template>
     <!-- Edit Post Form -->
                 <br><br>
         <div *ngIf="!postReplyBoolean; else createReplyForm">   
-            <div *ngIf="logInStatus">
+            <div class="center" *ngIf="logInStatus">
                 <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
             </div>
         </div>
     
     <!-- Create Reply Button -->
     <ng-template #createReplyForm>
-        <div *ngIf="logInStatus">
+        <div class="center" *ngIf="logInStatus">
             <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
-                <div *ngIf="darktheme; else lightForm">
-                    <body class="black-background">
-                        <label>Reply: <input type="text" name="description" required ngModel></label>     
-                        <br><br>
-                        <input type="submit" value="Submit">
-                    </body>
-                </div>
-                <ng-template #lightForm>
                     <body class="white-theme">
                         <label>Reply: <input type="text" name="description" required ngModel></label>     
                         <br><br>
                         <input type="submit" value="Submit">
+                        <button (click)="cancelCreateReply()">Cancel</button>
+                        <div class="center" *ngIf="replyTooLong">
+                        <p style="color:red"> Reply too long, please keep it under 245 characters.</p>
+                        </div>
                     </body>
-                </ng-template>
             </form>
         </div>
     </ng-template>
     <!-- Reply Form -->
                 <br><br>
     <br><br>
+    
+
+    <div class="center">
+        <h1 class="big-white">Replies:</h1>
+    </div>
     <div id="parent{{reply.id}}" *ngFor="let reply of replies">
         <div id="{{reply.id}}">
-            <div *ngIf="darktheme; else lightSections">
-                <h1 class="black-background">Replies:</h1>
-                <br><br>
-                <body class="black-background">
-                    <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
-                </body>
-            </div>
-            <ng-template #lightSections>
-                <h1 class="white-theme">Replies:</h1>
                 <br><br>
                 <body class="white-theme">
-                    <h5 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h5>
+                    <h2 class="center" style="padding-top: 5px;">{{reply.userEntity.userName}} says</h2>
                 </body>
-            </ng-template>
             <!-- Username of Replier theme  -->
             <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
                 <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
-                    <input type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+                    <div class="center">
+                    <input class="form-control" type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
                     <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
                     <input type="submit" value="Submit">
+                    <button (click)="cancelReplyDescription()">Cancel</button>
+                    <div *ngIf="replyTooLong">
+                    <p style="color: red;"> Reply too long, please keep it under 245 characters.</p>
+                    </div>
+                     </div>
                 </form>
             </div>
             <!-- Edit Reply Form -->
             <ng-template #editReplyDescription>
-                <span><div class="thought">{{reply.description}}</div></span>
+                <div class="thought">{{reply.description}}</div>
             </ng-template>
             <!-- Reply Description -->
             <div *ngIf="reply.userEntity.userName == currentUser">
-                <div *ngIf="editAndDeleteButtons">
-                    <button class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
-                    <button class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
+                <div class="center" *ngIf="editAndDeleteButtons">
+                    <button style="position:relative;" class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
+                    <button style="position:relative;" class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
                 </div>
             </div>
             <!-- Update and Delete Reply Buttons -->
@@ -132,6 +160,169 @@
         </div>
     </div>
     </div>
+</body>
 </div>
+<ng-template #darkerSections>
+    <header class="blackheader" style="position: relative;">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(0, 0, 0); border-bottom: 1px solid #fffdfd; padding: 15px;">
+                <div class="container">
+                <a class="navbar-brand" routerLink="/home" routerLinkActive="active" href="#">
+                    <img src="/assets/home-assets/rally_logo.png" alt="" height="75" width="80">
+                </a>
+                <div class="centering" id="navbarSupportedContent">
+                    <div style="text-align: center;" >
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item"><a class="nav-link"  routerLink="/events" routerLinkActive="active"><span class="beigecolor">EVENTS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/forum" routerLinkActive="active"><span class="beigecolor">FORUMS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">EATS</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/services" routerLinkActive="active"><span class="beigecolor">SERVICES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/resources" routerLinkActive="active"><span class="beigecolor">RESOURCES</span></a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active"><span class="beigecolor">MY PROFILE</span></a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+                <div *ngIf="!loginLoading">
+                    <div *ngIf="logInStatus; else notLoggedIn">
+                        <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                    </div>
+    
+                        <ng-template #notLoggedIn>
+                            <a routerLink="/login" routerLinkActive="active" class="logInButton">LOG IN</a>
+                        </ng-template>
+                    </div>
+            </nav>
+        </div>
+      </header>
+    <div id="theme" class="black">
+        <!-- background theme -->
+        <div *ngIf="!isLoading">
+            <div class="col-13">
+                <br>
+                <p style="text-align: center;font-family: 'Open Sans', sans-serif; font-size: 40px; font-weight: 800; color: beige;">{{postObject.title}}</p>
+               <hr style="width:60%; margin: auto;height:4px; color:beige; background-color:beige"><br>
+           </div>
+           <div style="position: absolute; left:0; right: 0;">
+           <div class="floatright">
+            <div style="background-color: black;" class="card">
+                <h1 class="card-title" style="font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 700; text-align: center; padding: 7px; color: beige;">   
+                    Hi, {{currentUser}} 
+                </h1>
+                <div style="text-align: center;">
+                    <img src="/assets/user-profile-assets/profile-pic.gif" width="60%" height="40%">
+                </div>
+                <br><br>
+                <div *ngIf="darktheme; else lightTheme">
+                    <button class="button3" (click)="Light()">lights on</button>
+                </div>
+                <ng-template #lightTheme>
+                    <div>
+                        <button  class="button2" (click)="Dark()">lights out</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        </div>
+        <!-- Title of Post -->
+                    <br><br>
+                <body class="black-background">
+                    <h2 class="center" style="padding-top: 5px;position:relative;">{{postObject.userEntity.userName}} says</h2>
+                </body>
+        <!-- Username of Poster -->
+            <div *ngIf="!updatePostDescription; else editPostDescription">
+                <div style="position: relative; " class="thought">{{postObject.description}}</div>
+                <div *ngIf="postObject.userEntity.userName == currentUser">
+                    <div class="center" *ngIf="postEditAndDeleteButtons">
+                        <button style="position: relative;" class="btn btn-info" (click)="editPost()">Edit Post Description</button>
+                        <button style="position: relative;" class="btn btn-danger" (click)="deletePost(postObject.id)">Delete Post</button>
+                    </div>
+                </div>
+            </div>
+                    <br>
+        <!-- Post Description and Edit/Delete Buttons -->
+            <ng-template #editPostDescription>
+                <form #editPostAttempt="ngForm" (ngSubmit)="editPostWithNewDescription(editPostAttempt)">
+                    <div class="center">
+                    <input class="form-control" type="text" name="newDescription" [(ngModel)]="postObject.description" required ngModel>
+                    <input style="position:relative;" type="submit" value="Submit">
+                    <button style="position:relative;" (click)="cancelPostDescription()">Cancel</button>
+                    <div *ngIf="replyTooLong">
+                        <p style="color:red;">Description is too long, please keep it under 245 characters.</p>
+                    </div>
+                    </div>
+                </form>
+            </ng-template>
+        <!-- Edit Post Form -->
+                    <br><br>
 
+        
+        <!-- Create Reply Button -->
+        <ng-template #createReplyForm>
+            <div class="center" *ngIf="logInStatus">
+                <form #createdReplyAttempt="ngForm" (ngSubmit)="createReply(createdReplyAttempt)">
+                        <body class="black-background">
+                            <label>Reply: <input type="text" name="description" required ngModel></label>     
+                            <br><br>
+                            <input type="submit" value="Submit">
+                            <button (click)="cancelCreateReply()">Cancel</button>
+                            <div class="center" *ngIf="replyTooLong">
+                                <p style="color:red"> Reply too long, please keep it under 245 characters.</p>
+                            </div>
+                        </body>
+                </form>
+            </div>
+        </ng-template>
+        <!-- Reply Form -->
+                    <br><br>
+        <br><br><br><br><br>
+        <div *ngIf="!postReplyBoolean; else createReplyForm">  
+            <div class="center" *ngIf="logInStatus">
+                <button (click)="populateForm()" class="btn btn-primary">Create Reply</button>
+            </div>
+        </div>
+        <br>
+        <div class="center">
+        <h1 class="big-black">Replies:</h1>
+        </div>
+        <div id="parent{{reply.id}}" *ngFor="let reply of replies">
+            <div id="{{reply.id}}">
+                <div class="center">
+                    <br><br>
+                    <body class="black-background">
+                        <h2 style="padding-top: 5px;">{{reply.userEntity.userName}} says</h2>
+                    </body>
+                </div>
+                <!-- Username of Replier theme  -->
+                <div *ngIf="updateDescription && editReplyDescription1 == reply.id; else editReplyDescription">
+                    <form #editReplyAttempt="ngForm" (ngSubmit)="updateDescription1(editReplyAttempt)">
+                        <div class="center">
+                        <input class="form-control" type="text" name="newDescription" [(ngModel)]="reply.description" required ngModel>
+                        <input type="hidden" name="username" [(ngModel)]="reply.userEntity.userName" required ngModel>
+                        <input type="submit" value="Submit">
+                        <div *ngIf="replyTooLong">
+                        <p style="color: red;"> Reply too long, please keep it under 245 characters.</p>
+                        </div>
+                         </div>
+                    </form>
+                </div>
+                <!-- Edit Reply Form -->
+                <ng-template #editReplyDescription>
+                    <div class="thought">{{reply.description}}</div>
+                </ng-template>
+                <!-- Reply Description -->
+                <div *ngIf="reply.userEntity.userName == currentUser">
+                    <div class="center" *ngIf="editAndDeleteButtons">
+                        <button style="position:relative;" class="btn btn-info" (click)="editDescription(reply.id)">Update reply</button>
+                        <button style="position:relative;" class="btn btn-danger" (click)="deleteReply(reply.id)">Delete</button>
+                    </div>
+                </div>
+                <!-- Update and Delete Reply Buttons -->
+                    <br><br>
+            </div>
+        </div>
+        </div>
+    </div>
 
+</ng-template>
+</div>

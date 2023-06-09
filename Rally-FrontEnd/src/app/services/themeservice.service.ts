@@ -4,12 +4,17 @@ import { ForumPostDTO } from '../community-forum-arm/models/ForumPostDTO';
 import { HttpClient } from '@angular/common/http';
 import { ForumPost } from '../community-forum-arm/models/ForumPost';
 import { map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthorizeService } from '../security/security-service/authorize.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeserviceService {
   testArray1: ForumPost[];
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private cookieService: CookieService,
+    private authorize: AuthorizeService,
+    private router: Router) { 
   }
 
 switchToLightTheme(){
@@ -24,7 +29,7 @@ switchToDarkTheme(){
   let sections = document.querySelectorAll("body");
   sections.forEach((section) => {section.setAttribute('class', 'black-background')});
   background.setAttribute('class', 'black');
-  localStorage.setItem('theme', 'dark');
+  localStorage.setItem('theme', 'dark'); 
 }
 createAPost(postInfo: NgForm, forumTopic: string){
   let postDetails: ForumPostDTO = {
@@ -78,5 +83,32 @@ testPost = async () => {
   const data = await resp.json();
   let newArray = data;
   return newArray
+}
+
+public getUserName(): any {
+
+  if (this.cookieService.check('token') === false){
+    return null;
+  }
+
+  let tokenInfo: any = this.cookieService.get('token')
+  const payload = atob(tokenInfo.split(".")[1])
+
+  try {
+    JSON.parse(payload)
+  } catch(e) {
+    this.authorize.logOut();
+    return;
+  }
+  const parsedPayload = JSON.parse(payload)
+  return parsedPayload.sub;
+
+}
+logOut() {
+  sessionStorage.clear();
+  localStorage.removeItem('userName');
+  localStorage.removeItem('id');
+  this.cookieService.delete('token');
+  return false;
 }
 }
