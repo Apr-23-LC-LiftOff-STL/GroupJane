@@ -6,6 +6,7 @@ import org.rally.backend.forumarm.models.ForumPosts;
 import org.rally.backend.forumarm.models.Replies;
 import org.rally.backend.forumarm.repository.ForumPostRepository;
 import org.rally.backend.forumarm.repository.RepliesRepository;
+import org.rally.backend.servicesarm.model.response.Service;
 import org.rally.backend.servicesarm.repository.ServiceRepository;
 import org.rally.backend.springsecurity.models.BadJWT;
 import org.rally.backend.springsecurity.repository.JWTBlockListRepository;
@@ -21,6 +22,7 @@ import org.rally.backend.userprofilearm.repository.*;
 import org.rally.backend.userprofilearm.utility.ImageUtility;
 import org.rally.backend.userprofilearm.utility.UserProfileControllerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,8 +80,33 @@ public class UserProfileController {
 
     /** Returns a list of all users for search component **/
     @GetMapping("/search")
-    public List<UserEntity> displayAllUsers() {
-        return this.userRepository.findAll();
+    public SearchUserThumbNail displayAllUsers() {
+        SearchUserThumbNail thumbNail = new SearchUserThumbNail();
+        List<UserEntity> userNames = new ArrayList<>();
+        List<ProfilePicture> profilePictures = new ArrayList<>();
+
+        /** Send user Entities with their profile pictures to the front **/
+        for (UserEntity user : this.userRepository.findAll()) {
+            if (profilePictureRepository.findByUserName(user.getUserName()).isPresent()) {
+
+                userNames.add(user);
+                ProfilePicture pic = profilePictureRepository.findByUserName(user.getUserName()).get();
+
+                profilePictures.add(ProfilePicture.builder()
+                        .id(pic.getId())
+                        .userName(user.getUserName())
+                        .type(pic.getType())
+                        .image(ImageUtility.decompressImage(pic.getImage())).build());
+
+            } else {
+                userNames.add(user);
+            }
+        }
+
+        thumbNail.setProfilePics(profilePictures);
+        thumbNail.setUserNames(userNames);
+
+        return thumbNail;
     }
 
     /** Returns information for a user being viewed **/
@@ -138,6 +165,11 @@ public class UserProfileController {
         /** Events need username, userid, or UserEntity inside model **/
         List<Event> targetEventPost = UserProfileControllerService.getUserEventPost(targetUser.getUserName());
         targetUserPostHistory.setViewUserEventPost(targetEventPost);
+
+
+        /** Retrieve Service Post and set in UserPostHistory Obj **/
+        List<Service> targetServicePost = UserProfileControllerService.getUserServicePost(targetUser.getUserName());
+        targetUserPostHistory.setViewUserServicePost(targetServicePost);
         /** Services, Resources, RestaurantReview need username, userid, or UserEntity inside model **/
 
         return new ResponseEntity<>(new UserBundle(targetUser, targetInformation, targetDirectMessages, targetUserPostHistory), HttpStatus.OK);

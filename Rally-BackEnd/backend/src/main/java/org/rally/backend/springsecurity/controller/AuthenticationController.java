@@ -78,7 +78,6 @@ public class AuthenticationController {
     }
 
     /** Register the user and saves to the repository, but doesn't mark the user as authentic yet **/
-
     @PostMapping("/register")
     public ResponseEntity<?> processRegistrationForm(@RequestBody UserBundleDTO userBundleDTO) {
         UserProfileControllerService.generateRoles();

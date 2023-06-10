@@ -4,7 +4,6 @@ import { ViewUserService } from '../services/view-user.service';
 import { NgForm } from '@angular/forms';
 import { AuthorizeService } from 'src/app/security/security-service/authorize.service';
 import { StorageService } from 'src/app/security/security-service/storage-service.service';
-
 @Component({
   selector: 'app-search-user',
   templateUrl: './search-user.component.html',
@@ -13,7 +12,9 @@ import { StorageService } from 'src/app/security/security-service/storage-servic
 export class SearchUserComponent implements OnInit {
 
   /* Search User Variables */
-  userList: UserEntity[]; 
+  userList: UserEntity[];
+  profilePics: any[];
+  dbImage: any[] = [];
   logInStatus: boolean;
   characterError: boolean = false;
 
@@ -27,12 +28,45 @@ export class SearchUserComponent implements OnInit {
       this.authorize.logOut();
     }
     
-    this.userService.getUserList().subscribe((data: UserEntity[]) => {
-      this.userList = data;
-      /* Remove active user from list */
+    this.userService.getUserList().subscribe((data: any) => {
+      this.userList = data.userNames;
+      this.profilePics = data.profilePics;
+
+      // /* Remove active user from list */
       this.userList = this.userList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
+
+      /* Make a list of objects with user name and user image for thumbnail display*/
+      let makeThumbNails = this.userList;
+      for (let pic of this.profilePics) {
+        for (let user of makeThumbNails) {
+          if (user.userName === pic.userName) {
+            let picAndName = {
+              userName: user.userName,
+              image: 'data:image/jpeg;base64,' + pic.image
+            }
+            this.dbImage.push(picAndName);
+            makeThumbNails = makeThumbNails.filter((user: UserEntity) => user.userName !== picAndName.userName)
+          }
+        }
+      }
+      /* Add remaining users to the list who don't have images */
+      for (let user of makeThumbNails) {
+        let picAndName = {
+          userName: user.userName,
+          image: null
+        }
+        this.dbImage.push(picAndName);
+      }
+      
     })
   }
+
+  generateImage(image) {
+    console.log(image)
+    let imageObj = 'data:image/jpeg;base64,' + image.image;
+    return imageObj;
+  }
+
 
   /* Search for specific user by name or by character */
   /* This method needs to be refactored to be handled by backend */

@@ -159,7 +159,7 @@ export class RegisterUserComponent implements OnInit {
         userInfoDTO: userInfo
       }
   
-      this.http.post('http://localhost:8080/api/register', userBundle).subscribe((response: any) => {
+      this.http.post( this.hostUrl + '/api/register', userBundle).subscribe((response: any) => {
         if (response.message === "Verify your account with the link sent to your email!") {
             this.emailVerifyLoading = false;
             this.postResponseMessageValid = response.message;
