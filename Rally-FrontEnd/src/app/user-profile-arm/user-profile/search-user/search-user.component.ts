@@ -62,7 +62,6 @@ export class SearchUserComponent implements OnInit {
   }
 
   generateImage(image) {
-    console.log(image)
     let imageObj = 'data:image/jpeg;base64,' + image.image;
     return imageObj;
   }
