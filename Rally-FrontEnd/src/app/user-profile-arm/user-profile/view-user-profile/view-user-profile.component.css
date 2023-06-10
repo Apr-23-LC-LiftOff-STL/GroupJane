@@ -164,3 +164,11 @@ body {
     font-size:medium;
     font-weight: 450;  
   }
+
+  button.logOutButton:hover{
+    background-color: #14CFAD;
+    color: #85CDE3;
+  }
+  a.nav-link:hover {
+    color: #85CDE3;
+  }

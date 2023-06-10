@@ -84,6 +84,7 @@ export class UserProfileComponent implements OnInit {
       
       /* Get all information relevent to user */
       this.activeUserService.getMainUserBundleByUserName(this.storageService.getUserName()).subscribe((data: any) => {
+        // console.log(data)
         this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
@@ -91,8 +92,9 @@ export class UserProfileComponent implements OnInit {
         this.hiddenPost = data.viewUserPostHistory.viewUserHiddenPost;
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
-        this.eventPost = data.viewUserPostHistory.viewUserEventPost;
-        this.servicePost = data.viewUserPostHistory.viewUserServicePost;        
+        this.eventPost = data.viewUserPostHistory.viewUserEventPost;      
+        this.servicePost = data.viewUserPostHistory.viewUserServicePost; 
+        console.log(data.viewUserPostHistory)
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
                                            this.userInformation.neighborhood,
@@ -107,7 +109,7 @@ export class UserProfileComponent implements OnInit {
         let makeThumbNails = this.userEntityDmList;
         for (let pic of dataProfilePics) {
           for (let user of makeThumbNails) {
-            if (user.userName === pic.userName) {
+            if (user.userName === pic.userId) {
               let picAndName = {
                 userName: user.userName,
                 image: 'data:image/jpeg;base64,' + pic.image
@@ -128,7 +130,7 @@ export class UserProfileComponent implements OnInit {
 
 
         /* Get all user post organized to display */
-        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost, this.servicePost);
+        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
       },  err => {

@@ -130,12 +130,12 @@ public class UserProfileControllerService {
         }
 
         for (UserEntity user : allUsers) {
-            if (profilePictureRepository.findByUserName(user.getUserName()).isPresent()) {
-                ProfilePicture pic = profilePictureRepository.findByUserName(user.getUserName()).get();
+            if (profilePictureRepository.findByUserId(user.getUserName()).isPresent()) {
+                ProfilePicture pic = profilePictureRepository.findByUserId(user.getUserName()).get();
 
                 allProfilePictures.add(ProfilePicture.builder()
                         .id(pic.getId())
-                        .userName(user.getUserName())
+                        .userId(user.getUserName())
                         .type(pic.getType())
                         .image(ImageUtility.decompressImage(pic.getImage())).build());
             }

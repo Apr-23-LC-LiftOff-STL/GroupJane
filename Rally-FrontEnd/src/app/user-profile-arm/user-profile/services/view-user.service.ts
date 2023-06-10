@@ -53,7 +53,7 @@ export class ViewUserService {
     }
   }
 
-  oneBigList(forumPost, forumReplies, events, services) {  // , resources, restaurantReview, services
+  oneBigList(forumPost, forumReplies, events) {  // , resources, restaurantReview, services
     let bigJoin: any[] = [];
     for (let post of forumPost) {
       let uniForumPost = {
@@ -88,17 +88,17 @@ export class ViewUserService {
       }
       bigJoin.push(uniEvent);
     }
-    for (let service of services) {
-      let uniService = {
-        id: Number(service.id),
-        type: "Service",
-        title: service.service,
-        description: service.description,
-        hidden: false,
-        originalObj: service
-      }
-      bigJoin.push(uniService);
-    }
+    // for (let service of services) {
+    //   let uniService = {
+    //     id: Number(service.id),
+    //     type: "Service",
+    //     title: service.service,
+    //     description: service.description,
+    //     hidden: false,
+    //     originalObj: service
+    //   }
+    //   bigJoin.push(uniService);
+    // }
     return bigJoin.sort();
   }
 

@@ -16,7 +16,9 @@
                     <li class="nav-item"><a class="nav-link" routerLink="/myProfile" routerLinkActive="active">MY PROFILE</a></li>
                     </ul>
                 </div>             
-                <a routerLink="/myProfile" routerLinkActive="active" class="logInButton">LOG IN</a>
+                <div>
+                    <button class="logOutButton" (click)="logOut()">LOG OUT</button>
+                </div>
             </div>
             </div>
         </nav>

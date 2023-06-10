@@ -29,6 +29,7 @@ export class SearchUserComponent implements OnInit {
     }
     
     this.userService.getUserList().subscribe((data: any) => {
+      console.log(data)
       this.userList = data.userNames;
       this.profilePics = data.profilePics;
 
@@ -39,7 +40,7 @@ export class SearchUserComponent implements OnInit {
       let makeThumbNails = this.userList;
       for (let pic of this.profilePics) {
         for (let user of makeThumbNails) {
-          if (user.userName === pic.userName) {
+          if (user.userName === pic.userId) {
             let picAndName = {
               userName: user.userName,
               image: 'data:image/jpeg;base64,' + pic.image
@@ -116,5 +117,9 @@ export class SearchUserComponent implements OnInit {
       }
       return this.userList = this.userList.filter((user: UserEntity) => user !== remove);
     })
+  }
+
+  logOut() {
+    this.authorize.logOut()
   }
 }
