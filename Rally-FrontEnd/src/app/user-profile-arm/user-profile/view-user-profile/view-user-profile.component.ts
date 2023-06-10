@@ -44,6 +44,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   dmCharacters = true;
   userReal = true;
   filterActive = false;
+  loading: boolean = false;
 
   @ViewChild('dmBottomOfScroll') private myScrollContainer: ElementRef;
 
@@ -59,7 +60,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
     if (this.authorize.isloggedIn() !== true) {
       this.authorize.logOut();
     }
-
+    this.loading = true;
     /* Pulling userName and userId from  */
     this.activatedRoute.paramMap.subscribe(params => {
     this.viewUserName = params.get('userName');
@@ -86,6 +87,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       this.dmList = data.viewUserDmHistory.directMessageList;
       this.displayConversation(this.userEntityInformation.viewUser);
       this.scrollToBottom;
+      this.loading = false;
     },  err => {
       /* temporary error handling / want to build better handling approach */
       if (err.status === 500 || err.status === 400) {

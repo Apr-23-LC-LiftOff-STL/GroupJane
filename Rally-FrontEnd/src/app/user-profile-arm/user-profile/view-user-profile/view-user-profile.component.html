@@ -34,10 +34,13 @@
             </ng-template>
 
             <div style="margin-top: 140px;"> 
-                <div>
+                <div *ngIf="!loading; else pleaseWait">
                     <h2 style="font-family: Open Sans, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Viewing: {{ this?.viewUserName }}</h2>
                     <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">SEARCH PROFILES</a></button>
                 </div>
+                <ng-template #pleaseWait>
+                    <h2 style="font-family: Open Sans, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Loading....</h2>
+                </ng-template>
             </div>
         </div>
         <br><br><br><br><br>
@@ -144,6 +147,7 @@
                                     <!-- Display ForumPost objects -->
                                     <div *ngIf="post.type === 'ForumPost'">
                                         <div class="card-body">
+                                            <div class="card" style="background-color: #f9a8054f"><h6>{{ post.type }}</h6></div>
                                         <h1><a routerLink='/forum/post/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
                                         <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
                                         <!-- <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >hide</button></div> -->
@@ -153,7 +157,8 @@
                                     <!-- Display Event objects -->
                                     <div *ngIf="post.type === 'Event'">
                                         <div class="card-body">
-                                        <h1><a style="color: #0EBB9A">{{ post.title }}</a></h1>
+                                            <div class="card" style="background-color: #f9a8054f"><h6>{{ post.type }}</h6></div>
+                                            <h1><a style="color: #0EBB9A" routerLink='/event/{{post.id}}' routerLinkActive="active" id="link">{{ post.title }}</a></h1>
                                         <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
                                         <!-- <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div> -->
                                         </div>
@@ -162,6 +167,7 @@
                                     <!-- Display Service objects -->
                                     <div *ngIf="post.type === 'Service'">
                                         <div class="card-body">
+                                            <div class="card" style="background-color: #f9a8054f"><h6>{{ post.type }}</h6></div>
                                         <h1><a style="color: #F9A605;">{{ post.title }}</a></h1>
                                         <h4 style="font-size: 15px; font-weight: normal;">{{ post.description }}</h4>
                                         <!-- <div style="text-align: left;"><button class="btn btn-outline-info btn-xm" type="button" (click)="hidePost(post)" >Hide this Post</button></div> -->

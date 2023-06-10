@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserEntity } from '../../models/UserEntity';
 import { ViewUserService } from '../services/view-user.service';
 import { NgForm } from '@angular/forms';
@@ -12,24 +12,27 @@ import { StorageService } from 'src/app/security/security-service/storage-servic
 export class SearchUserComponent implements OnInit {
 
   /* Search User Variables */
-  userList: UserEntity[];
+  userList: any[];
   profilePics: any[];
   dbImage: any[] = [];
+  commentBox: any;
   logInStatus: boolean;
   characterError: boolean = false;
+  reset: boolean = false;
 
   constructor(private userService: ViewUserService,
               private authorize: AuthorizeService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     /* Makes sure user is logged in before */
     if (this.authorize.isloggedIn() !== true) {
       this.authorize.logOut();
     }
+    this.reset = true;
     
     this.userService.getUserList().subscribe((data: any) => {
-      console.log(data)
       this.userList = data.userNames;
       this.profilePics = data.profilePics;
 
@@ -58,13 +61,39 @@ export class SearchUserComponent implements OnInit {
         }
         this.dbImage.push(picAndName);
       }
+      this.reset = false;
       
     })
   }
 
-  generateImage(image) {
-    let imageObj = 'data:image/jpeg;base64,' + image.image;
-    return imageObj;
+  ngAfterContentChecked() {
+    this.userList = this.userList
+    this.cdref.detectChanges();
+  }
+
+  makeThumbNail() {
+    /* Make a list of objects with user name and user image for thumbnail display*/
+    let makeThumbNails = this.userList;
+    for (let pic of this.profilePics) {
+      for (let user of makeThumbNails) {
+        if (user.userName === pic.userId) {
+          let picAndName = {
+            userName: user.userName,
+            image: 'data:image/jpeg;base64,' + pic.image
+          }
+          this.dbImage.push(picAndName);
+          makeThumbNails = makeThumbNails.filter((user: UserEntity) => user.userName !== picAndName.userName)
+        }
+      }
+    }
+    /* Add remaining users to the list who don't have images */
+    for (let user of makeThumbNails) {
+      let picAndName = {
+        userName: user.userName,
+        image: null
+      }
+      this.dbImage.push(picAndName);
+    }
   }
 
 
@@ -85,7 +114,10 @@ export class SearchUserComponent implements OnInit {
     for (let i =0; i < this.userList.length; i++) {
       if (this.userList[i].userName.toLowerCase() === searchUser.value.search.toLowerCase()) {
         filterUser.push(this.userList[i])
-        return this.userList = filterUser;
+        this.userList = filterUser;
+        this.dbImage = [];
+        this.makeThumbNail()
+        return
       }
     }
     
@@ -101,21 +133,26 @@ export class SearchUserComponent implements OnInit {
         }
       }
     }
-    return this.userList = filterUser;
+
+    this.userList = filterUser;
+    this.dbImage = [];
+    this.makeThumbNail()
+
+    return this.dbImage ;
   }
 
   /* Reset results */
   resetResults() {
+    this.reset = true;
     this.characterError = false;
-    this.userService.getUserList().subscribe((data: UserEntity[]) => {
-      this.userList = data;
-      let remove: UserEntity;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].userName === localStorage.getItem("userName")) {
-          remove = this.userList[i];
-        }
-      }
-      return this.userList = this.userList.filter((user: UserEntity) => user !== remove);
+    this.commentBox = '';
+    this.userService.getUserList().subscribe((data: any) => {
+      this.reset = false;
+      this.userList = data.userNames;
+      this.userList = this.userList.filter((user: UserEntity) => user.userName !== this.storageService.getUserName());
+      this.dbImage = [];
+      this.makeThumbNail()
+      return;
     })
   }
 

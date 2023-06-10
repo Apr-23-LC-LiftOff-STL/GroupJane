@@ -58,6 +58,7 @@ export class UserProfileComponent implements OnInit {
   changeProfilePic: boolean = true;
   filterActive: boolean = false;
   uploadErrorMsg: any[];
+  loading: boolean = false;
 
   /* HTML variables */
   @ViewChild('dmBottomOfScroll') private scrollMe: ElementRef;
@@ -81,10 +82,11 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     /* Checks if user is logged in */
     if (this.authorize.isloggedIn() === true) {
+      this.loading = true;
       
       /* Get all information relevent to user */
       this.activeUserService.getMainUserBundleByUserName(this.storageService.getUserName()).subscribe((data: any) => {
-        // console.log(data)
+       
         this.userEntity = data.viewUser;
         this.userInformation = data.viewUserInformation;
         this.allDmHistory = data.viewUserDmHistory.directMessageList;
@@ -93,8 +95,7 @@ export class UserProfileComponent implements OnInit {
         this.forumPost = data.viewUserPostHistory.viewUserForumPost;
         this.forumReplies = data.viewUserPostHistory.viewUserForumReplies;
         this.eventPost = data.viewUserPostHistory.viewUserEventPost;      
-        this.servicePost = data.viewUserPostHistory.viewUserServicePost; 
-        console.log(data.viewUserPostHistory)
+        this.servicePost = data.viewUserPostHistory.viewUserServicePost;
         this.model = new NgUserInformation(this.userInformation.firstName,
                                            this.userInformation.lastName,
                                            this.userInformation.neighborhood,
@@ -130,9 +131,10 @@ export class UserProfileComponent implements OnInit {
 
 
         /* Get all user post organized to display */
-        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost);
+        this.allPost = this.activeUserService.oneBigList(this.forumPost, this.forumReplies, this.eventPost, this.servicePost);
         this.allPostFilter = this.allPost;
         this.updateHiddenPost();
+        this.loading = false;
       },  err => {
         /* temporary error handling / want to build better handling approach */
         if (err.status === 500 || err.status === 400) {
@@ -348,7 +350,7 @@ export class UserProfileComponent implements OnInit {
       city: userDetails.value.city,
       state: userDetails.value.state
     }
-    this.http.put<any>( this.hostUrl + '/user/update-user-information/' + this.storageService.getUserName(), userInfo).subscribe((response: UserInformation) => {
+    this.http.put<any>( this.hostUrl + '/user/update-user-information/' + this.userEntity.id, userInfo).subscribe((response: UserInformation) => {
         this.userInformation = response
         this.changeInfo=true;
         return;

@@ -34,10 +34,13 @@
     <div class="container">
         <div class="row">
             <div style="margin-top: 140px;"> 
-                <div>
+                <div *ngIf="!loading; else pleaseWait">
                     <h2 style="font-family: Open Sans, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Hi, {{ userEntity?.userName }}</h2>
                     <button  class="myButton" ><a routerLink="/search" routerLinkActive="active">SEARCH PROFILES</a></button>
                 </div>
+                <ng-template #pleaseWait>
+                    <h2 style="font-family: Open Sans, sans-serif; font-size: 60px; font-weight: 700; margin-bottom: -60px;">Loading....</h2>
+                </ng-template>
             </div>
         </div>
 
