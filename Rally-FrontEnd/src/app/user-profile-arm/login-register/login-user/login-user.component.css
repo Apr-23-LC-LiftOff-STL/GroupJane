@@ -11,6 +11,14 @@
 	text-decoration: none;
 }
 
+.Rh1 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
 a.logInButton:hover{
     background-color: #14CFAD;
     color: #85CDE3;

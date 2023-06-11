@@ -59,6 +59,7 @@ export class UserProfileComponent implements OnInit {
   filterActive: boolean = false;
   uploadErrorMsg: any[];
   loading: boolean = false;
+  sendingMessage:boolean = false;
 
   /* HTML variables */
   @ViewChild('dmBottomOfScroll') private scrollMe: ElementRef;
@@ -240,6 +241,7 @@ export class UserProfileComponent implements OnInit {
 
   /* Select file to be uploaded */
   public onImageUpload(event) {
+    this.uploadErrorMsg= []
     if (event.target.files[0].size > 1024000) {   
       this.uploadErrorMsg = ["File is too large, please select a smaller image", true];
       this.uploadedImage = null;
@@ -251,8 +253,9 @@ export class UserProfileComponent implements OnInit {
 
   /* Upload the image to the database */
   imageUploadAction() {
-    if (this.uploadedImage === null) {
-      console.log("Nope");
+    this.uploadErrorMsg = []
+    if (this.uploadedImage === null || this.uploadedImage === undefined) {
+      this.uploadErrorMsg = ["Please choose a valid image to upload.", true]
       return;
     }
 
@@ -270,6 +273,10 @@ export class UserProfileComponent implements OnInit {
     })
   }  
 
+  cancelPhotoUpload() {
+    this.changeProfilePic = true;
+    this.uploadedImage = null;
+  }
 
 
   /* Display conversation with user selected */
@@ -315,6 +322,7 @@ export class UserProfileComponent implements OnInit {
     /*reset error message on user messages if errors occured */
     this.noError = true;
     this.tooManyChar = false;
+    this.sendingMessage = true;
 
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.respondToDm.id,
@@ -335,6 +343,7 @@ export class UserProfileComponent implements OnInit {
 
     /* Post message to backend if message is valid then refresh the conversation to reflect message sent */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
+      this.sendingMessage = false;
       this.allDmHistory = response;
       this.commentBox = '';
       this.refreshConversation(this.respondToDm.userName)

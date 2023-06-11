@@ -79,7 +79,7 @@
                     <p style="color: #C03E24;">{{ uploadErrorMsg[0] }}</p>
                 </div>
                 <input style="margin-top: 5px;"class="btn btn-outline-info btn-xm" type="button" value="upload" (click)="imageUploadAction()">
-                <button style="margin-left: 5px; margin-top: 5px; margin-top: 5px;" class="btn btn-outline-info btn-xm" (click)="changeProfilePic=true">cancel</button>
+                <button style="margin-left: 5px; margin-top: 5px; margin-top: 5px;" class="btn btn-outline-info btn-xm" (click)="cancelPhotoUpload()">cancel</button>
             </div>
             </form>
         </ng-template>
@@ -169,7 +169,7 @@
         <!-- Banner that changes based on who your messaging at the top -->
          <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" *ngIf="userDms; else differentTitle">   </h4>
         <ng-template #differentTitle>
-            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" >{{ respondToDm.userName }} </h4>
+            <h4 style="margin-left: 10px; margin-bottom: 3px; margin-top: 10px; font-size: 20px; padding: 15px; text-align: center; font-weight: bolder;" ><a style="color: #000;" routerLink="/user/{{respondToDm.userName}}" routerLinkActive="active">{{respondToDm.userName}}</a></h4>
         </ng-template>
         <!-- Flex box to display user conversations -->
         <div class="card" >
@@ -217,6 +217,7 @@
                         <h6 style="color: #C03E24;">Minimum of 3 characters required.</h6>
                         </ng-template>
                         <br>
+                        <div *ngIf="sendingMessage">Sending.....</div>
                         <textarea class="form-control" placeholder="RALLY message:" rows="2" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                         <div *ngIf="noError; else lengthError">
                         <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 50%;" type="submit" value="send">   

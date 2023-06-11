@@ -97,6 +97,7 @@
                                                 <h6 style="color: #C03E24;">Minimum of 3 characters required.</h6>
                                             </ng-template>
                                             <br>
+                                            <div *ngIf="sendingMessage">Sending.....</div>
                                             <textarea class="form-control" placeholder="RALLY message:" rows="2" cols="30" name="messageContent" minlength="10" [(ngModel)]="commentBox"></textarea>
                                             <div *ngIf="dmCharacters; else lengthError">
                                                 <input class="btn btn-outline-info btn-xm" style="margin-top: 5px;  float: right; width: 100%;" type="submit" value="send">   

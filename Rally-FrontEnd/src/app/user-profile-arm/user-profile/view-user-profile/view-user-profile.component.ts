@@ -27,6 +27,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   dmList: DirectMessage[];
   conversation: DirectMessage[];
   commentBox: any;
+  sendingMessage: boolean = false;
 
   /* User Profile Pic */
   dbImage: any;
@@ -150,6 +151,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
   viewingUserSendDM(dmMessageDetails: NgForm) {
     this.dmCharacters = true;
     this.tooManyChar = false;
+    this.sendingMessage = true;
 
     let sendDirectMessage: DirectMessageDTO = {
       receivedByUserId: this.userEntityInformation.viewUser.id,
@@ -170,6 +172,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
 
     /* Posts the dm if it doens't trigger any errors */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
+      this.sendingMessage = false;
       this.dmList = response;
       this.commentBox = '';
       this.displayConversation(this.userEntityInformation.viewUser);
