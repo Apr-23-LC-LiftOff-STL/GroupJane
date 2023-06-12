@@ -341,11 +341,12 @@ export class UserProfileComponent implements OnInit {
       return
     }
 
+    this.commentBox = '';
+
     /* Post message to backend if message is valid then refresh the conversation to reflect message sent */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.sendingMessage = false;
-      this.allDmHistory = response;
-      this.commentBox = '';
+      this.allDmHistory = response;  
       this.refreshConversation(this.respondToDm.userName)
     });   
   } 

@@ -170,11 +170,12 @@ export class ViewUserProfileComponent implements OnInit, AfterViewChecked {
       return
     }
 
+    this.commentBox = '';
+
     /* Posts the dm if it doens't trigger any errors */
     this.viewUser.postDirectMessage(sendDirectMessage).subscribe((response: DirectMessage[]) => {
       this.sendingMessage = false;
       this.dmList = response;
-      this.commentBox = '';
       this.displayConversation(this.userEntityInformation.viewUser);
     });
   }
